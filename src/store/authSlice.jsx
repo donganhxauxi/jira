@@ -3,8 +3,8 @@ import { createSlice } from '@reduxjs/toolkit';
 const AuthContext = createSlice({
   name: 'auth',
   initialState: {
-    token: null,
-    isLoggedIn: false,
+    token: localStorage.getItem('token') || null,
+    isLoggedIn: !!localStorage.getItem('token'),
   },
   reducers: {
     login(state, action) {

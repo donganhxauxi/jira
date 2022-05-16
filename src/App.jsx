@@ -9,24 +9,23 @@ function App() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
   return (
-    <div className="App">
-      <Switch>
-        <Route path="/" exact>
-          <Redirect to="/login" />
-        </Route>
-        <Route path="/login">
-          <Login />
-        </Route>
-        <Route path="/projects">
-          {isLoggedIn && <Projects />}
-          {!isLoggedIn && <Redirect to="/login" />}
-        </Route>
-        <Route path="*">
-          <Redirect to="/login" />
-        </Route>
-      </Switch>
 
-    </div>
+    <Switch>
+      <Route path="/" exact>
+        {isLoggedIn ? <Redirect to="/project" /> : <Redirect to="login" />}
+      </Route>
+      <Route path="/login">
+        {isLoggedIn ? <Redirect to="/project" /> : <Login />}
+      </Route>
+      <Route path="/project">
+        {isLoggedIn ? <Projects /> : <Redirect to="/login" />}
+      </Route>
+
+      {/* <Route path="*">
+        {isLoggedIn ? <Redirect to="/project" /> : <Redirect to="login" />}
+      </Route> */}
+    </Switch>
+
   );
 }
 

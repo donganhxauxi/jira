@@ -16,13 +16,14 @@ function Login() {
   const dispatch = useDispatch();
   const history = useHistory();
   const submitHandler = async (e) => {
+    e.preventDefault();
+    const loginData = {
+      email: emailInputRef.current.value,
+      password: passwordInputRef.current.value,
+    };
+
     try {
-      e.preventDefault();
       setIsSubmiting(true);
-      const loginData = {
-        email: emailInputRef.current.value,
-        password: passwordInputRef.current.value,
-      };
       const loginResponse = await fetch(
         'https://jiranew.cybersoft.edu.vn/api/Users/signin',
         {
@@ -40,9 +41,9 @@ function Login() {
         throw new Error(data.message);
       }
       dispatch(AuthActions.login({ token: data.content.accessToken }));
-      history.push('/projects');
-    } catch (requestError) {
-      setError(requestError.message);
+      history.replace('/project');
+    } catch (errorMessage) {
+      setError(errorMessage.message);
     }
   };
   return (
