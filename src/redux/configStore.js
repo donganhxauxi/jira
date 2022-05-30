@@ -7,6 +7,8 @@ import reduxThunk from "redux-thunk";
 import createMiddleWareSaga from "redux-saga";
 import { rootSaga } from "./sagas/rootSaga";
 import { UserLoginCyberBugsReducer } from "./reducers/UserCyberBugsReducer";
+import { ProjectCategoryReducer } from "./reducers/ProjectCategoryReducer";
+import { ProjectCyberBugsReducer } from "./reducers/ProjectCyberBugsReducer";
 
 const middleWareSaga = createMiddleWareSaga();
 
@@ -15,6 +17,8 @@ const rootReducer = combineReducers({
   ModalReducer,
   HistoryReducer,
   UserLoginCyberBugsReducer,
+  ProjectCategoryReducer,
+  ProjectCyberBugsReducer,
 });
 
 const store = createStore(
