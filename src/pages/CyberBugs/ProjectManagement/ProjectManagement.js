@@ -4,6 +4,7 @@ import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
 import ReactHtmlParser from "react-html-parser";
 import FormEditProject from "../../../components/Forms/FormEditProject/FromEditProject";
+import { Popconfirm, message } from "antd";
 
 // const data =  [
 //     {
@@ -591,9 +592,22 @@ export default function ProjectManagement(props) {
               >
                 <EditOutlined style={{ fontSize: 13 }} />
               </button>
-              <button className="btn btn-danger" style={{ fontSize: 5 }}>
-                <DeleteOutlined style={{ fontSize: 13 }} />
-              </button>
+              <Popconfirm
+                title="Are you sure to delete this project?"
+                onConfirm={() => {
+                  dispatch({
+                    type: "DELETE_PROJECT_SAGA",
+                    idProject: record.id,
+                  });
+                }}
+                okText="Yes"
+                cancelText="No"
+              >
+                <button className="btn btn-danger" style={{ fontSize: 5 }}>
+                  <DeleteOutlined style={{ fontSize: 13 }} />
+                </button>
+              </Popconfirm>
+              ,
             </div>
           );
         },

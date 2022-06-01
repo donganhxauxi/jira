@@ -18,7 +18,6 @@ import { history } from "../../../util/history";
 //Quản lý các action saga
 
 function* signinSaga(action) {
-  // console.log(action);
   yield put({
     type: DISPLAY_LOADING,
   });

@@ -7,7 +7,7 @@ import {
 } from "../../constants/Cyberbugs/Cyberbugs";
 
 function* getAllProjectCategorySaga(action) {
-  // console.log("actionSaga", action);
+  
 
   try {
     //Gọi api lấy dữ liệu về
