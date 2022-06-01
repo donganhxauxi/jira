@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
-
 import { Button, Space, Table, Tag } from "antd";
-
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
-
 import ReactHtmlParser from "react-html-parser";
+import FormEditProject from "../../../components/Forms/FormEditProject/FromEditProject";
 
 // const data =  [
 //     {
@@ -528,18 +526,6 @@ export default function ProjectManagement(props) {
         return 1;
       },
     },
-    // {
-    //   title: 'description',
-    //   dataIndex: 'description',
-    //   key: 'description',
-    //   render: (text, record, index) => {
-    //     let contentJSX = ReactHtmlParser(text);
-
-    //     return <div>
-    //         {contentJSX}
-    //     </div>
-    //   }
-    // },
 
     {
       title: "category",
@@ -584,7 +570,25 @@ export default function ProjectManagement(props) {
         {
           return (
             <div>
-              <button className="btn mr-1 btn-primary" style={{ fontSize: 5 }}>
+              <button
+                className="btn mr-1 btn-primary"
+                style={{ fontSize: 5 }}
+                onClick={() => {
+                  const action = {
+                    type: "OPEN_FORM_EDIT_PROJECT",
+                    Component: <FormEditProject />,
+                  };
+
+                  //dispatch lên reducer nội dung drawer
+                  dispatch(action);
+                  //dispatch dữ liệu dòng hiện tai lên reducer
+                  const actionEditProject = {
+                    type: "EDIT_PROJECT",
+                    projectEditModel: record,
+                  };
+                  dispatch(actionEditProject);
+                }}
+              >
                 <EditOutlined style={{ fontSize: 13 }} />
               </button>
               <button className="btn btn-danger" style={{ fontSize: 5 }}>

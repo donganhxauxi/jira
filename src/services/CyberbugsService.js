@@ -51,4 +51,16 @@ export const cyberbugsService = {
       }, //token yêu cầu từ backend chứng minh user đã đăng nhập rồi
     });
   },
+  updateProject: (projectUpdate) => { 
+    return Axios({
+        url:`${DOMAIN_CYBERBUG}/api/Project/updateProject?projectId=${projectUpdate.id}`,
+        method:'PUT',
+        data:projectUpdate,
+        headers: {'Authorization': 'Bearer ' + localStorage.getItem(TOKEN),
+       //token yêu cầu từ backend chứng minh user đã đăng nhập rồi
+       TokenCybersoft: TOKEN_CYBERSOFT,
+    
+      }
+    })
+}
 };

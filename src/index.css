@@ -293,6 +293,7 @@
 
 .fa-arrow-up {
   color: #d85463;
+  margin-left: 3px;
 }
 
 .fa-check-square {
@@ -372,6 +373,10 @@
 
 .task-click div span {
   padding-right: 20xp;
+}
+
+.task-click div i {
+  margin-right: 5px;
 }
 
 .fa-trash-alt {
