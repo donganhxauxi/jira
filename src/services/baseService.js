@@ -1,4 +1,6 @@
 import Axios from "axios"
+
+
 import { DOMAIN_CYBERBUG, TOKEN, TOKEN_CYBERSOFT } from "../util/constants/settingSystem"
 
 export class baseService {
@@ -10,7 +12,7 @@ export class baseService {
             method:'PUT',
             data:model,
             headers: {'Authorization': 'Bearer ' + localStorage.getItem(TOKEN),
-            TokenCybersoft: TOKEN_CYBERSOFT} //JWT
+            'TokenCybersoft': TOKEN_CYBERSOFT} 
         }) 
     }
 
@@ -20,7 +22,7 @@ export class baseService {
             method:'POST',
             data:model,
             headers: {'Authorization': 'Bearer ' + localStorage.getItem(TOKEN),
-            TokenCybersoft: TOKEN_CYBERSOFT} //JWT
+            'TokenCybersoft': TOKEN_CYBERSOFT} 
         }) 
     }
 
@@ -30,7 +32,7 @@ export class baseService {
             url:`${DOMAIN_CYBERBUG}/${url}`,
             method:'GET',
             headers: {'Authorization': 'Bearer ' + localStorage.getItem(TOKEN),
-            TokenCybersoft: TOKEN_CYBERSOFT} 
+            'TokenCybersoft': TOKEN_CYBERSOFT} 
         })
     }
 
@@ -39,7 +41,7 @@ export class baseService {
             url:`${DOMAIN_CYBERBUG}/${url}`,
             method:'DELETE',
             headers: {'Authorization': 'Bearer ' + localStorage.getItem(TOKEN),
-            TokenCybersoft: TOKEN_CYBERSOFT} 
+            'TokenCybersoft': TOKEN_CYBERSOFT} 
         })
     }
 }

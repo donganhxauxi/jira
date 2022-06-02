@@ -14,6 +14,7 @@ import { USER_SIGNIN_API, USLOGIN } from "../../constants/Cyberbugs/Cyberbugs";
 import { DISPLAY_LOADING, HIDE_LOADING } from "../../constants/LoadingConst";
 import { TOKEN, USER_LOGIN } from "../../../util/constants/settingSystem";
 import { history } from "../../../util/history";
+import { userService } from "../../../services/UserService";
 
 //Quản lý các action saga
 
@@ -50,4 +51,44 @@ function* signinSaga(action) {
 
 export function* theoDoiSignin() {
   yield takeLatest(USER_SIGNIN_API, signinSaga);
+}
+
+//Quản lý các action saga
+function* getUserSaga(action) {
+  //Gọi api
+  try {
+    const { data, status } = yield call(() =>
+      userService.getUser(action.keyWord)
+    );
+
+    yield put({
+      type: "GET_USER_SEARCH",
+      lstUserSearch: data.content,
+    });
+  } catch (err) {
+    console.log(err.response.data);
+  }
+}
+
+export function* theoDoiGetUser() {
+  yield takeLatest("GET_USER_API", getUserSaga);
+}
+
+//Quản lý các action saga
+function* addUserProjectSaga(action) {
+  try {
+    const { data, status } = yield call(() =>
+      userService.assignUserProject(action.userProject)
+    );
+
+    yield put({
+      type: "GET_LIST_PROJECT_SAGA",
+    });
+  } catch (err) {
+    console.log(err.response.data);
+  }
+}
+
+export function* theoDoiAddUserProject() {
+  yield takeLatest("ADD_USER_PROJECT_API", addUserProjectSaga);
 }

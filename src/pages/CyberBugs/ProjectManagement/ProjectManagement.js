@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, Space, Table, Tag } from "antd";
+import { AutoComplete, Button, Popover, Space, Table, Tag, Avatar } from "antd";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
 import ReactHtmlParser from "react-html-parser";
@@ -472,6 +472,13 @@ export default function ProjectManagement(props) {
   const projectList = useSelector(
     (state) => state.ProjectCyberBugsReducer.projectList
   );
+
+  const { userSearch } = useSelector(
+    (state) => state.UserLoginCyberBugsReducer
+  );
+
+  const [value, setValue] = useState("");
+
   //Sử dụng useDispatch để gọi action
   const dispatch = useDispatch();
 
@@ -555,6 +562,66 @@ export default function ProjectManagement(props) {
           return -1;
         }
         return 1;
+      },
+    },
+    {
+      title: "members",
+      key: "members",
+      render: (text, record, index) => {
+        return (
+          <div>
+            {record.members?.slice(0, 3).map((member, index) => {
+              return <Avatar key={index} src={member.avatar} />;
+            })}
+
+            {record.members?.length > 3 ? <Avatar>...</Avatar> : ""}
+
+            <Popover
+              placement="rightBottom"
+              title={"Add user"}
+              content={() => {
+                return (
+                  <AutoComplete
+                    options={userSearch?.map((user, index) => {
+                      return {
+                        label: user.name,
+                        value: user.userId.toString(),
+                      };
+                    })}
+                    value={value} //value label mỗi lần setState cập nhập lại
+                    onChange={(text) => {
+                      setValue(text);
+                    }}
+                    //value người dùng chọn
+                    onSelect={(valueSelect, option) => {
+                      //set giá trị của hộp thọai = option.label
+                      setValue(option.label);
+                      //Gọi api gửi về backend
+                      dispatch({
+                        type: "ADD_USER_PROJECT_API",
+                        userProject: {
+                          //giá trị ứng với backend
+                          projectId: record.id,
+                          userId: valueSelect,
+                        },
+                      });
+                    }}
+                    style={{ width: "100%" }}
+                    onSearch={(value) => {
+                      dispatch({
+                        type: "GET_USER_API",
+                        keyWord: value,
+                      });
+                    }}
+                  />
+                );
+              }}
+              trigger="click"
+            >
+              <Button style={{ borderRadius: "50%" }}>+</Button>
+            </Popover>
+          </div>
+        );
       },
     },
 

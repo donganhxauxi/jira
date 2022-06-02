@@ -38,7 +38,7 @@ export const cyberbugsService = {
       headers: {
         Authorization: "Bearer " + localStorage.getItem(TOKEN),
         TokenCybersoft: TOKEN_CYBERSOFT,
-      }, 
+      },
     });
   },
   getListProject: () => {
