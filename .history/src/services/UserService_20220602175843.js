@@ -12,10 +12,6 @@ export class UserService extends baseService {
   assignUserProject = (userProject) => {
     return this.post(`api/Project/assignUserProject`, userProject);
   };
-
-  deleteUserFromProject = (userProject) => {
-    return this.post(`api/Project/removeUserFromProject`, userProject);
-  };
 }
 
 export const userService = new UserService();

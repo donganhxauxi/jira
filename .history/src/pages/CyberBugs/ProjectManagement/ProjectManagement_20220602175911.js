@@ -571,64 +571,7 @@ export default function ProjectManagement(props) {
         return (
           <div>
             {record.members?.slice(0, 3).map((member, index) => {
-              return (
-                <Popover
-                  key={index}
-                  placement="top"
-                  title="members"
-                  content={() => {
-                    return (
-                      <table className="table">
-                        <thead>
-                          <tr>
-                            <th>Id</th>
-                            <th>avatar</th>
-                            <th>name</th>
-                            <th></th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {record.members?.map((item, index) => {
-                            return (
-                              <tr key={index}>
-                                <td>{item.userId}</td>
-                                <td>
-                                  <img
-                                    src={item.avatar}
-                                    width="30"
-                                    height="30"
-                                    style={{ borderRadius: "15px" }}
-                                  />
-                                </td>
-                                <td>{item.name}</td>
-                                <td>
-                                  <button
-                                    onClick={() => {
-                                      dispatch({
-                                        type: "REMOVE_USER_PROJECT_API",
-                                        userProject: {
-                                          userId: item.userId,
-                                          projectId: record.id,
-                                        },
-                                      });
-                                    }}
-                                    className="btn btn-danger"
-                                    style={{ borderRadius: "50%" }}
-                                  >
-                                    X
-                                  </button>
-                                </td>
-                              </tr>
-                            );
-                          })}
-                        </tbody>
-                      </table>
-                    );
-                  }}
-                >
-                  <Avatar key={index} src={member.avatar} />
-                </Popover>
-              );
+              return <Avatar key={index} src={member.avatar} />;
             })}
 
             {record.members?.length > 3 ? <Avatar>...</Avatar> : ""}
