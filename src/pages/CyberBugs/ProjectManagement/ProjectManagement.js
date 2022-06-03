@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import ReactHtmlParser from "react-html-parser";
 import FormEditProject from "../../../components/Forms/FormEditProject/FromEditProject";
 import { Popconfirm, message } from "antd";
+import { NavLink } from "react-router-dom";
 
 // const data =  [
 //     {
@@ -525,6 +526,9 @@ export default function ProjectManagement(props) {
       title: "projectName",
       dataIndex: "projectName",
       key: "projectName",
+      render: (text,record,index) => {
+        return <NavLink to={`/projectdetail/${record.id}`}> {text}</NavLink>
+    },
       sorter: (item2, item1) => {
         let projectName1 = item1.projectName?.trim().toLowerCase();
         let projectName2 = item2.projectName?.trim().toLowerCase();

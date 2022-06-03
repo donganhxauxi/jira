@@ -154,12 +154,12 @@ const EditProjectForm = withFormik({
   },
   validationSchema: Yup.object().shape({}),
   handleSubmit: (values, { props, setSubmitting }) => {
-    //Khi người dùng bấm submit => đưa dữ liệu về backedn thông qua api
+    //Khi người dùng bấm submit => đưa dữ liệu về backend thông qua api
 
     //Gọi saga
     props.dispatch({
       type: "UPDATE_PROJECT_SAGA",
-      projectUpdate: values,
+      prjectUpdate: values,
     });
   },
   displayName: "EditProjectForm",
