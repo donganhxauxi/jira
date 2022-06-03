@@ -13,7 +13,7 @@ import { PlusOutlined } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
 
 export default function DrawerCyberBugs(props) {
-  const { visible, ComponentContentDrawer, callBackSubmit } = useSelector(
+  const { visible, ComponentContentDrawer, callBackSubmit,title } = useSelector(
     (state) => state.drawerReducer
   );
 
@@ -31,7 +31,7 @@ export default function DrawerCyberBugs(props) {
   return (
     <>
       <Drawer
-        title="Create a new account"
+        title={title}
         width={720}
         onClose={onClose}
         visible={visible}

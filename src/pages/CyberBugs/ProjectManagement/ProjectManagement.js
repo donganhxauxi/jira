@@ -526,9 +526,9 @@ export default function ProjectManagement(props) {
       title: "projectName",
       dataIndex: "projectName",
       key: "projectName",
-      render: (text,record,index) => {
-        return <NavLink to={`/projectdetail/${record.id}`}> {text}</NavLink>
-    },
+      render: (text, record, index) => {
+        return <NavLink to={`/projectdetail/${record.id}`}> {text}</NavLink>;
+      },
       sorter: (item2, item1) => {
         let projectName1 = item1.projectName?.trim().toLowerCase();
         let projectName2 = item2.projectName?.trim().toLowerCase();
@@ -705,6 +705,7 @@ export default function ProjectManagement(props) {
                 onClick={() => {
                   const action = {
                     type: "OPEN_FORM_EDIT_PROJECT",
+                    title: "Edit Project",
                     Component: <FormEditProject />,
                   };
 
