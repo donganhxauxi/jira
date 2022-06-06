@@ -5,7 +5,10 @@ import { DISPLAY_LOADING, HIDE_LOADING } from "../../constants/LoadingConst";
 import { history } from "../../../util/history";
 import { notifiFunction } from "../../../util/Notification/notificationCyberbugs";
 import { projectService } from "../../../services/ProjectService";
-import { GET_ALL_PROJECT, GET_ALL_PROJECT_SAGA } from "../../constants/Cyberbugs/ProjectCyberBugsConstants";
+import {
+  GET_ALL_PROJECT,
+  GET_ALL_PROJECT_SAGA,
+} from "../../constants/Cyberbugs/ProjectCyberBugsConstants";
 
 function* createProjectSaga(action) {
   console.log("actionCreateProject", action);
@@ -137,68 +140,59 @@ export function* theoDoiDeleteProject() {
   yield takeLatest("DELETE_PROJECT_SAGA", deleteProjectSaga);
 }
 
-
-
-
 function* getProjectDetailSaga(action) {
-  
   yield put({
-      type: DISPLAY_LOADING
-  })
-  yield delay (500);
+    type: DISPLAY_LOADING,
+  });
+  yield delay(500);
 
   try {
-      const { data, status } = yield call(() => projectService.getProjectDetail(action.projectId));
-      
-      console.log('data',data);
-      //Lấy dữ liệu thành công thì đưa dữ liệu lên redux
-      yield put({
-          type:'PUT_PROJECT_DETAIL',
-          projectDetail:data.content
-      })
-  
+    const { data, status } = yield call(() =>
+      projectService.getProjectDetail(action.projectId)
+    );
+
+    console.log("data", data);
+    //Lấy dữ liệu thành công thì đưa dữ liệu lên redux
+    yield put({
+      type: "PUT_PROJECT_DETAIL",
+      projectDetail: data.content,
+    });
   } catch (err) {
-      console.log('404 not found !')
-      history.push('/projectmanagement');
+    console.log("404 not found !");
+    history.push("/projectmanagement");
   }
- 
+
   yield put({
-      type: HIDE_LOADING
-  })
+    type: HIDE_LOADING,
+  });
 }
 
 export function* theoDoiGetProjectDetail() {
-  yield takeLatest('GET_PROJECT_DETAIL', getProjectDetailSaga);
+  yield takeLatest("GET_PROJECT_DETAIL", getProjectDetailSaga);
 }
 
-
-
-
 function* getProjectAllSaga(action) {
-  
   yield put({
-      type: DISPLAY_LOADING
-  })
-  yield delay (500);
+    type: DISPLAY_LOADING,
+  });
+  yield delay(500);
 
   try {
-      const { data, status } = yield call(() => projectService.getAllProject());
-      
-    
-      //Lấy dữ liệu thành công thì đưa dữ liệu lên redux
-      yield put({
-          type:GET_ALL_PROJECT,
-          arrProject:data.content
-      })
-  
+    const { data, status } = yield call(() => projectService.getAllProject());
+
+    //Lấy dữ liệu thành công thì đưa dữ liệu lên redux
+    yield put({
+      type: GET_ALL_PROJECT,
+      arrProject: data.content,
+    });
   } catch (err) {
-      console.log('404 not found !')
-      history.push('/projectmanagement');
+    console.log("404 not found !");
+    history.push("/projectmanagement");
   }
- 
+
   yield put({
-      type: HIDE_LOADING
-  })
+    type: HIDE_LOADING,
+  });
 }
 
 export function* theoDoiGetAllProjectSaga() {
