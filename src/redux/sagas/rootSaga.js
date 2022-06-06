@@ -6,6 +6,7 @@ import * as ProjectSaga from "./Cyberbugs/ProjectSaga";
 import * as TaskTypeSaga from "./Cyberbugs/TaskTypeSaga";
 import * as PrioritySaga from "./Cyberbugs/PrioritySaga";
 import * as TaskSaga from "./Cyberbugs/TaskSaga";
+import * as StatusSaga from "./Cyberbugs/StatusSaga";
 export function* rootSaga() {
   yield all([
     //Nghiệp vụ cyberbugs ...
@@ -13,6 +14,7 @@ export function* rootSaga() {
     Cyberbugs.theoDoiGetUser(),
     Cyberbugs.theoDoiAddUserProject(),
     Cyberbugs.theoDoiRemoveUserProject(),
+    Cyberbugs.theoDoiGetUserByProjectIdSaga(),
     ProjectCategorySaga.theoDoigetAllProjectCategory(),
     ProjectSaga.theoDoiCreateProjectSaga(),
     ProjectSaga.theoDoiGetListProjectSaga(),
@@ -20,6 +22,7 @@ export function* rootSaga() {
     ProjectSaga.theoDoiDeleteProject(),
     ProjectSaga.theoDoiGetProjectDetail(),
     ProjectSaga.theoDoiGetAllProjectSaga(),
+    StatusSaga.theoDoiGetAllStatusSaga(),
 
     TaskTypeSaga.theoDoiGetAllTaskTypeSaga(),
     PrioritySaga.theoDoiGetAllPriority(),
