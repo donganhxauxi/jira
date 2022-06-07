@@ -31,7 +31,7 @@ function CreateProject(props) {
 
   return (
     <div className="container m-5">
-      <h3>CreateProject</h3>
+      <h3 style={{marginLeft:11}}>CreateProject</h3>
       <form
         className="container"
         onSubmit={handleSubmit}

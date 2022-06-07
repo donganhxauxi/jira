@@ -89,7 +89,8 @@
 /* Menu */
 .menu {
   height: 100vh;
-  width: 20%;
+  /* height: auto; */
+  width: 17%;
   /* margin-left: 4%; */
   background-color: #f4f5f7;
 }
@@ -252,7 +253,7 @@
     flex-direction: column;
     margin: 0px 5px;
     min-height: 400px;
-    width: 20%;
+    /* width: 20%; */
     border-radius: 3px;
     background: rgb(244, 245, 247);
 }
@@ -426,9 +427,9 @@
 }
 
 .item {
-  margin-right: 20px;
+  margin-right: 5px;
   background: #e9eaf0;
-  padding: 5px;
+  padding: 3px;
   border-radius: 5px;
   flex-basis: 50%;
 }

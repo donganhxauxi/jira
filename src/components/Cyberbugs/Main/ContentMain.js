@@ -8,43 +8,44 @@ export default function ContentMain(props) {
       return (
         <div
           key={index}
-          className="card"
-          // style={{ width: "17rem", height: "25rem" }}
+          className="card pb-2"
+          style={{ width: "13rem", height: "auto" }}
         >
           <div className="card-header">{taskListDetail.statusName}</div>
           <ul className="list-group list-group-flush">
-            <li
-              className="list-group-item"
-              data-toggle="modal"
-              data-target="#infoModal"
-              style={{ cursor: "pointer" }}
-            >
-              <p>
-                Each issue has a single reporter but can have multiple assignees
-              </p>
-              <div className="block" style={{ display: "flex" }}>
-                <div className="block-left">
-                  <i className="fa fa-bookmark" />
-                  <i className="fa fa-arrow-up" />
-                </div>
-                <div className="block-right">
-                  <div className="avatar-group" style={{ display: "flex" }}>
-                    <div className="avatar">
-                      <img
-                        src={require("../../../assets/img/pic1.jpg")}
-                        alt="1"
-                      />
+            {taskListDetail.lstTaskDeTail.map((task, index) => {
+              return (
+                <li
+                  key={index}
+                  className="list-group-item"
+                  data-toggle="modal"
+                  data-target="#infoModal"
+                  style={{ cursor: "pointer" }}
+                >
+                  <p className="font-weight-300">{task.taskName}</p>
+                  <div className="block" style={{ display: "flex" }}>
+                    <div className="block-left">
+                      <p className="text-danger">
+                        {task.priorityTask.priority}
+                      </p>
+                      {/* <i className="fa fa-bookmark" />
+                  <i className="fa fa-arrow-up" /> */}
                     </div>
-                    <div className="avatar">
-                      <img
-                        src={require("../../../assets/img/pic2.jpg")}
-                        alt="2"
-                      />
+                    <div className="block-right">
+                      <div className="avatar-group" style={{ display: "flex" }}>
+                        {task.assigness.map((mem, index) => {
+                          return (
+                            <div className="avatar" key={index}>
+                              <img src={mem.avatar} alt={mem.avatar} />
+                            </div>
+                          );
+                        })}
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
-            </li>
+                </li>
+              );
+            })}
           </ul>
         </div>
       );
@@ -58,31 +59,4 @@ export default function ContentMain(props) {
   );
 }
 
-// <div className="card" style={{ width: '17rem', height: '25rem' }}>
-// <div className="card-header">
-//     SELECTED FOR DEVELOPMENT 2
-// </div>
-// <ul className="list-group list-group-flush">
-//     <li className="list-group-item">Cras justo odio</li>
-//     <li className="list-group-item">Dapibus ac facilisis in</li>
-// </ul>
-// </div>
-// <div className="card" style={{ width: '17rem', height: '25rem' }}>
-// <div className="card-header">
-//     IN PROGRESS 2
-// </div>
-// <ul className="list-group list-group-flush">
-//     <li className="list-group-item">Cras justo odio</li>
-//     <li className="list-group-item">Dapibus ac facilisis in</li>
-// </ul>
-// </div>
-// <div className="card" style={{ width: '17rem', height: '25rem' }}>
-// <div className="card-header">
-//     DONE 3
-// </div>
-// <ul className="list-group list-group-flush">
-//     <li className="list-group-item">Cras justo odio</li>
-//     <li className="list-group-item">Dapibus ac facilisis in</li>
-//     <li className="list-group-item">Vestibulum at eros</li>
-// </ul>
-// </div>
+

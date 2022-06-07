@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 
 export default function MenuCyberbugs() {
   return (
-    <div className="menu">
+    <div className="menu" >
       <div className="account">
         <div className="avatar">
           <img src={require("../../assets/img/pic4.jfif")} alt="123" />
