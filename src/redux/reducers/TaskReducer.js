@@ -1,59 +1,38 @@
+import { GET_TASK_DETAIL } from "../constants/Cyberbugs/TaskConstants"
+
 const initialState = {
     taskDetailModal:   {
-        "priorityTask": {
-          "priorityId": 4,
-          "priority": "Lowest"
-        },
-        "taskTypeDetail": {
-          "id": 2,
-          "taskType": "new task"
-        },
-        "assigness": [
-          {
-            "id": 1027,
-            "avatar": "https://ui-avatars.com/api/?name=thanh",
-            "name": "thanh",
-            "alias": "khai"
-          },
-          {
-            "id": 1024,
-            "avatar": "https://ui-avatars.com/api/?name=zoro112212",
-            "name": "zoro112212",
-            "alias": "le-ngoai-ngu"
-          },
-          {
-            "id": 850,
-            "avatar": "https://ui-avatars.com/api/?name=hehehe123",
-            "name": "hehehe123",
-            "alias": "thangtv"
-          }
-        ],
-        "lstComment": [
-          {
-            "id": 4120,
-            "idUser": 1913,
-            "name": "hongkongdoll",
-            "avatar": "https://ui-avatars.com/api/?name=hongkongdoll",
-            "commentContent": "hi"
-          }
-        ],
-        "taskId": 4558,
-        "taskName": "spiderman",
-        "alias": "spiderman",
-        "description": "<p>patman spiderman</p>",
-        "statusId": "1",
-        "originalEstimate": 30,
-        "timeTrackingSpent": 10,
-        "timeTrackingRemaining": 10,
-        "typeId": 2,
-        "priorityId": 4,
-        "projectId": 5081
+      "priorityTask": {
+        "priorityId": 1,
+        "priority": "High"
       },
+      "taskTypeDetail": {
+        "id": 1,
+        "taskType": "bug"
+      },
+      "assigness": [],
+      "lstComment": [],
+      "taskId": 4567,
+      "taskName": "Spider",
+      "alias": "spider",
+      "description": "<p>ok ok</p>",
+      "statusId": "1",
+      "originalEstimate": 20,
+      "timeTrackingSpent": 10,
+      "timeTrackingRemaining": 10,
+      "typeId": 1,
+      "priorityId": 1,
+      "projectId": 5102
+    },
 }
 
 
 export const TaskReducer = (state = initialState,action) => {
     switch (action.type) {
+
+      case GET_TASK_DETAIL: {
+        return {...state,taskDetailModal:action.taskDetailModal}
+    }
 
     default:
         return state

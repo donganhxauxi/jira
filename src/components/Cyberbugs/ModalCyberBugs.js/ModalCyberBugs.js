@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { GET_ALL_PRIORITY_SAGA } from "../../../redux/constants/Cyberbugs/PriorityConstants";
 import { GET_ALL_STATUS_SAGA } from "../../../redux/constants/Cyberbugs/StatusConstant";
 import ReactHtmlParser from "react-html-parser";
+import { UPDATE_STATUS_TASK_SAGA } from "../../../redux/constants/Cyberbugs/TaskConstants";
 export default function ModalCyberBugs(props) {
   const { taskDetailModal } = useSelector((state) => state.TaskReducer);
   const { arrStatus } = useSelector((state) => state.StatusReducer);
@@ -169,7 +170,24 @@ export default function ModalCyberBugs(props) {
                     <select
                       className="custom-select"
                       value={taskDetailModal.statusId}
-                      onChange={(e) => {}}
+                      onChange={(e) => {
+                        const action = {
+                          type: UPDATE_STATUS_TASK_SAGA,
+                          taskUpdateStatus: {
+                            taskId: taskDetailModal.taskId,
+                            statusId: e.target.value,
+                            projectId: taskDetailModal.projectId,
+                          },
+                        };
+
+                        console.log('action',action);
+                        console.log("taskupdatestatus", {
+                          taskId: taskDetailModal.taskId,
+                          statusId: e.target.value,
+                        });
+
+                        dispatch(action);
+                      }}
                     >
                       {arrStatus.map((status, index) => {
                         return (
@@ -244,6 +262,7 @@ export default function ModalCyberBugs(props) {
                       type="text"
                       className="estimate-hours"
                       value={taskDetailModal.originalEstimate}
+                      onChange={(e) => {}}
                     />
                   </div>
                   <div className="time-tracking">
