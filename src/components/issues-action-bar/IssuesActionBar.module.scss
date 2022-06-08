@@ -4,7 +4,7 @@
     height: 100%;
     width: 64px;
     transition: width 0.5s;
-    position: relative;
+    position: fixed;
     &:hover {
         width: 200px;
         box-shadow: rgba(0,0,0,.6%) 0px 0px 50px 0px;

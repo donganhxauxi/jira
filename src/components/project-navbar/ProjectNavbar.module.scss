@@ -7,6 +7,7 @@
     background: rgb(244, 245, 247);
     border-right: 1px solid rgb(223, 225, 230);
     overflow: hidden auto;
+    position: relative;
 }
 
 .NavbarHeader {
@@ -64,3 +65,9 @@
     }
 
 }
+
+@media only screen and (max-width: 768px) {
+    .ProjectNavbar {
+        display: none;
+    }
+  }

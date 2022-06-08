@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom';
 import backgroudImg from '../../assets/login-bg.jpg';
 import classes from './Login.module.scss';
 import { API_KEY } from '../../constants/Constants';
-import { AuthActions } from '../../store/authSlice';
+import { AuthActions } from '../../store/auth-slice';
 
 function Login() {
   const [isSubmiting, setIsSubmiting] = useState(null);
