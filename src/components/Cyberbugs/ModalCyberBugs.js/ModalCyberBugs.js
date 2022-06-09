@@ -4,18 +4,25 @@ import { GET_ALL_PRIORITY_SAGA } from "../../../redux/constants/Cyberbugs/Priori
 import { GET_ALL_STATUS_SAGA } from "../../../redux/constants/Cyberbugs/StatusConstant";
 import ReactHtmlParser from "react-html-parser";
 import {
+  CHANGE_ASSIGNESS,
   CHANGE_TASK_MODAL,
+  REMOVE_USER_ASSIGN,
   UPDATE_STATUS_TASK_SAGA,
 } from "../../../redux/constants/Cyberbugs/TaskConstants";
 
 import { GET_ALL_TASK_TYPE_SAGA } from "../../../redux/constants/Cyberbugs/TaskTypeConstants";
 import { Editor } from "@tinymce/tinymce-react";
+import { Select } from "antd";
+
+const { Option } = Select;
 
 export default function ModalCyberBugs(props) {
   const { taskDetailModal } = useSelector((state) => state.TaskReducer);
   const { arrStatus } = useSelector((state) => state.StatusReducer);
   const { arrPriority } = useSelector((state) => state.PriorityReducer);
   const { arrTaskType } = useSelector((state) => state.TaskTypeReducer);
+  const { projectDetail } = useSelector((state) => state.ProjectReducer);
+
   const [visibleEditor, setVisibleEditor] = useState(false);
   const [historyContent, setHistoryContent] = useState(
     taskDetailModal.description
@@ -339,31 +346,74 @@ export default function ModalCyberBugs(props) {
                   </div>
                   <div className="assignees" style={{ marginBottom: 10 }}>
                     <h6>ASSIGNEES</h6>
-                    <div style={{ display: "flex" }}>
+                    <div className="row">
                       {taskDetailModal.assigness.map((user, index) => {
                         return (
-                          <div
-                            key={index}
-                            style={{ display: "flex" }}
-                            className="item"
-                          >
-                            <div className="avatar">
-                              <img src={user.avatar} alt={user.avatar} />
+                          <div className="col-6  mt-2 mb-2">
+                            <div
+                              key={index}
+                              style={{ display: "flex", width: "fit-content" }}
+                              className="item"
+                            >
+                              <div className="avatar">
+                                <img src={user.avatar} alt={user.avatar} />
+                              </div>
+                              <p className="name mt-1 ml-1">
+                                {user.name}
+                                <i
+                                  className="fa fa-times"
+                                  style={{ marginLeft: 5, cursor: "pointer" }}
+                                  onClick={() => {
+                                    dispatch({
+                                      type: REMOVE_USER_ASSIGN,
+                                      userId: user.id,
+                                    });
+                                  }}
+                                />
+                              </p>
                             </div>
-                            <p className="name mt-1 ml-1">
-                              {user.name}
-                              <i
-                                className="fa fa-times"
-                                style={{ marginLeft: 5 }}
-                              />
-                            </p>
                           </div>
                         );
                       })}
 
-                      <div style={{ display: "flex", alignItems: "center" }}>
-                        <i className="fa fa-plus" style={{ marginRight: 5 }} />
-                        <span>Add more</span>
+                      <div className="col-6  mt-2 mb-2">
+                        <Select
+                          options={projectDetail.members
+                            ?.filter((mem) => {
+                              let index = taskDetailModal.assigness?.findIndex(
+                                (us) => us.id === mem.userId
+                              );
+                              if (index !== -1) {
+                                return false;
+                              }
+                              return true;
+                            })
+                            .map((mem, index) => {
+                              return { value: mem.userId, label: mem.name };
+                            })}
+                          optionFilterProp="label"
+                          style={{ width: "100%" }}
+                          name="lstUser"
+                          value="+ Add more"
+                          className="form-control"
+                          onSelect={(value) => {
+                            if (value == "0") {
+                              return;
+                            }
+                            let userSelected = projectDetail.members.find(
+                              (mem) => mem.userId == value
+                            );
+                            userSelected = {
+                              ...userSelected,
+                              id: userSelected.userId,
+                            };
+                            //dispatchReducer
+                            dispatch({
+                              type: CHANGE_ASSIGNESS,
+                              userSelected,
+                            });
+                          }}
+                        ></Select>
                       </div>
                     </div>
                   </div>
