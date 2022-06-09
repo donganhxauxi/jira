@@ -6,6 +6,7 @@ import ReactHtmlParser from "react-html-parser";
 import {
   CHANGE_ASSIGNESS,
   CHANGE_TASK_MODAL,
+  HANDLE_CHANGE_POST_API_SAGA,
   REMOVE_USER_ASSIGN,
   UPDATE_STATUS_TASK_SAGA,
 } from "../../../redux/constants/Cyberbugs/TaskConstants";
@@ -91,7 +92,8 @@ export default function ModalCyberBugs(props) {
               className="btn btn-primary m-2"
               onClick={() => {
                 dispatch({
-                  type: CHANGE_TASK_MODAL,
+                  type: HANDLE_CHANGE_POST_API_SAGA,
+                  actionType: CHANGE_TASK_MODAL,
                   name: "description",
                   value: content,
                 });
@@ -104,7 +106,8 @@ export default function ModalCyberBugs(props) {
               className="btn btn-primary m-2"
               onClick={() => {
                 dispatch({
-                  type: CHANGE_TASK_MODAL,
+                  type: HANDLE_CHANGE_POST_API_SAGA,
+                  actionType: CHANGE_TASK_MODAL,
                   name: "description",
                   value: historyContent,
                 });
@@ -131,7 +134,8 @@ export default function ModalCyberBugs(props) {
   const handleChange = (e) => {
     const { name, value } = e.target;
     dispatch({
-      type: CHANGE_TASK_MODAL,
+      type: HANDLE_CHANGE_POST_API_SAGA,
+      actionType: CHANGE_TASK_MODAL,
       name,
       value,
     });
@@ -365,7 +369,8 @@ export default function ModalCyberBugs(props) {
                                   style={{ marginLeft: 5, cursor: "pointer" }}
                                   onClick={() => {
                                     dispatch({
-                                      type: REMOVE_USER_ASSIGN,
+                                      type: HANDLE_CHANGE_POST_API_SAGA,
+                                      actionType: REMOVE_USER_ASSIGN,
                                       userId: user.id,
                                     });
                                   }}
@@ -407,9 +412,9 @@ export default function ModalCyberBugs(props) {
                               ...userSelected,
                               id: userSelected.userId,
                             };
-                            //dispatchReducer
                             dispatch({
-                              type: CHANGE_ASSIGNESS,
+                              type: HANDLE_CHANGE_POST_API_SAGA,
+                              actionType: CHANGE_ASSIGNESS,
                               userSelected,
                             });
                           }}
