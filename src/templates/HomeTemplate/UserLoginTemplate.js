@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { Route } from "react-router-dom";
-import { Button, Layout } from "antd";
+import React, { useState, useEffect } from 'react';
+import { Route } from 'react-router-dom';
+import { Button, Layout } from 'antd';
 
-const { Header, Footer, Sider, Content } = Layout;
+const {
+  Header, Footer, Sider, Content,
+} = Layout;
 
-export const UserLoginTemplate = (props) => {
+export function UserLoginTemplate(props) {
   const [{ width, height }, setSize] = useState({
     width: Math.round(window.innerWidth),
     height: Math.round(window.innerHeight),
@@ -19,32 +21,28 @@ export const UserLoginTemplate = (props) => {
     };
   }, []);
 
-  let { Component, ...restRoute } = props;
+  const { Component, ...restRoute } = props;
 
   return (
     <Route
       {...restRoute}
-      render={(propsRoute) => {
-        return (
-          <>
-            <Layout>
-              <Sider
-                width={width / 2}
-                style={{
-                  height: height,
-                  backgroundImage: `url(https://picsum.photos/${Math.round(
-                    width / 2
-                  )}/${height})`,
-                  backgroundSize: "100%",
-                }}
-              ></Sider>
-              <Content>
-                <Component {...propsRoute} />
-              </Content>
-            </Layout>
-          </>
-        );
-      }}
+      render={(propsRoute) => (
+        <Layout>
+          <Sider
+            width={width / 2}
+            style={{
+              height,
+              backgroundImage: `url(https://picsum.photos/${Math.round(
+                width / 2,
+              )}/${height})`,
+              backgroundSize: '100%',
+            }}
+          />
+          <Content>
+            <Component {...propsRoute} />
+          </Content>
+        </Layout>
+      )}
     />
   );
-};
+}

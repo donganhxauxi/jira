@@ -1,68 +1,60 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import { GET_TASK_DETAIL_SAGA } from "../../../redux/constants/Cyberbugs/TaskConstants";
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { GET_TASK_DETAIL_SAGA } from '../../../redux/constants/Cyberbugs/TaskConstants';
 
 export default function ContentMain(props) {
   const { projectDetail } = props;
   const dispatch = useDispatch();
 
-  const renderCardTaskList = () => {
-    return projectDetail.lstTask?.map((taskListDetail, index) => {
-      return (
-        <div
-          key={index}
-          className="card pb-2"
-          style={{ width: "13rem", height: "auto" }}
-        >
-          <div className="card-header">{taskListDetail.statusName}</div>
-          <ul className="list-group list-group-flush">
-            {taskListDetail.lstTaskDeTail.map((task, index) => {
-              return (
-                <li
-                  key={index}
-                  className="list-group-item"
-                  data-toggle="modal"
-                  data-target="#infoModal"
-                  style={{ cursor: "pointer" }}
-                  onClick={() => {
-                    dispatch({
-                      type: GET_TASK_DETAIL_SAGA,
-                      taskId: task.taskId,
-                    });
-                  }}
-                >
-                  <p className="font-weight-300">{task.taskName}</p>
-                  <div className="block" style={{ display: "flex" }}>
-                    <div className="block-left">
-                      <p className="text-danger">
-                        {task.priorityTask.priority}
-                      </p>
-                      {/* <i className="fa fa-bookmark" />
+  const renderCardTaskList = () => projectDetail.lstTask?.map((taskListDetail, index) => (
+    <div
+      key={index}
+      className="card pb-2"
+      style={{ width: '13rem', height: 'auto' }}
+    >
+      <div className="card-header">{taskListDetail.statusName}</div>
+      <ul className="list-group list-group-flush">
+        {taskListDetail.lstTaskDeTail.map((task, index) => (
+          <li
+            key={index}
+            className="list-group-item"
+            data-toggle="modal"
+            data-target="#infoModal"
+            style={{ cursor: 'pointer' }}
+            onClick={() => {
+              dispatch({
+                type: GET_TASK_DETAIL_SAGA,
+                taskId: task.taskId,
+              });
+            }}
+          >
+            <p className="font-weight-300">{task.taskName}</p>
+            <div className="block" style={{ display: 'flex' }}>
+              <div className="block-left">
+                <p className="text-danger">
+                  {task.priorityTask.priority}
+                </p>
+                {/* <i className="fa fa-bookmark" />
                   <i className="fa fa-arrow-up" /> */}
+              </div>
+              <div className="block-right">
+                <div className="avatar-group" style={{ display: 'flex' }}>
+                  {task.assigness.map((mem, index) => (
+                    <div className="avatar" key={index}>
+                      <img src={mem.avatar} alt={mem.avatar} />
                     </div>
-                    <div className="block-right">
-                      <div className="avatar-group" style={{ display: "flex" }}>
-                        {task.assigness.map((mem, index) => {
-                          return (
-                            <div className="avatar" key={index}>
-                              <img src={mem.avatar} alt={mem.avatar} />
-                            </div>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  </div>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      );
-    });
-  };
+                  ))}
+                </div>
+              </div>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  ));
 
   return (
-    <div className="content" style={{ display: "flex" }}>
+    <div className="content" style={{ display: 'flex' }}>
       {renderCardTaskList()}
     </div>
   );

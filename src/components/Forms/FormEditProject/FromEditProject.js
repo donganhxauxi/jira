@@ -1,13 +1,13 @@
-import { Editor } from "@tinymce/tinymce-react";
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { withFormik } from "formik";
-import { connect } from "react-redux";
-import * as Yup from "yup";
+import { Editor } from '@tinymce/tinymce-react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector, connect } from 'react-redux';
+import { withFormik } from 'formik';
+
+import * as Yup from 'yup';
 
 function FormEditProject(props) {
   const arrProjectCategory = useSelector(
-    (state) => state.ProjectCategoryReducer.arrProjectCategory
+    (state) => state.ProjectCategoryReducer.arrProjectCategory,
   );
 
   const dispatch = useDispatch();
@@ -23,17 +23,17 @@ function FormEditProject(props) {
     setFieldValue,
   } = props;
 
-  //componentdidmount
+  // componentdidmount
   useEffect(() => {
-    //Gọi api load project category
-    dispatch({ type: "GET_ALL_PROJECT_CATEGORY_SAGA" });
+    // Gọi api load project category
+    dispatch({ type: 'GET_ALL_PROJECT_CATEGORY_SAGA' });
 
-    //Load sự kiện submit lên drawer nút submit
-    dispatch({ type: "SET_SUBMIT_EDIT_PROJECT", submitFunction: handleSubmit });
+    // Load sự kiện submit lên drawer nút submit
+    dispatch({ type: 'SET_SUBMIT_EDIT_PROJECT', submitFunction: handleSubmit });
   }, []);
 
   const handleEditorChange = (content, editor) => {
-    setFieldValue("description", content);
+    setFieldValue('description', content);
   };
 
   return (
@@ -69,13 +69,11 @@ function FormEditProject(props) {
               name="categoryId"
               value={values.categoryId}
             >
-              {arrProjectCategory?.map((item, index) => {
-                return (
-                  <option key={index} value={item.id}>
-                    {item.projectCategoryName}
-                  </option>
-                );
-              })}
+              {arrProjectCategory?.map((item, index) => (
+                <option key={index} value={item.id}>
+                  {item.projectCategoryName}
+                </option>
+              ))}
             </select>
           </div>
         </div>
@@ -87,40 +85,40 @@ function FormEditProject(props) {
               initialValue={values.description}
               value={values.description}
               init={{
-                selector: "textarea#myTextArea",
+                selector: 'textarea#myTextArea',
 
                 height: 300,
                 menubar: false,
 
                 plugins: [
-                  "a11ychecker",
-                  "advlist",
-                  "advcode",
-                  "advtable",
-                  "autolink",
-                  "checklist",
-                  "export",
-                  "lists",
-                  "link",
-                  "image",
-                  "charmap",
-                  "preview",
-                  "anchor",
-                  "searchreplace",
-                  "visualblocks",
-                  "powerpaste",
-                  "fullscreen",
-                  "formatpainter",
-                  "insertdatetime",
-                  "media",
-                  "table",
-                  "help",
-                  "wordcount",
+                  'a11ychecker',
+                  'advlist',
+                  'advcode',
+                  'advtable',
+                  'autolink',
+                  'checklist',
+                  'export',
+                  'lists',
+                  'link',
+                  'image',
+                  'charmap',
+                  'preview',
+                  'anchor',
+                  'searchreplace',
+                  'visualblocks',
+                  'powerpaste',
+                  'fullscreen',
+                  'formatpainter',
+                  'insertdatetime',
+                  'media',
+                  'table',
+                  'help',
+                  'wordcount',
                 ],
                 toolbar:
-                  "undo redo | casechange blocks | bold italic backcolor | " +
-                  "alignleft aligncenter alignright alignjustify | " +
-                  "bullist numlist checklist outdent indent | removeformat | a11ycheck code table help",
+                  'undo redo | casechange blocks | bold italic backcolor | '
+                  + 'alignleft aligncenter alignright alignjustify | '
+                  + 'bullist numlist checklist outdent indent | removeformat | a11ycheck code table help',
               }}
               onEditorChange={handleEditorChange}
             />
@@ -134,7 +132,7 @@ function FormEditProject(props) {
 const EditProjectForm = withFormik({
   enableReinitialize: true,
   mapPropsToValues: (props) => {
-    //(Lấy đưa vào formik chứ không đưa vào compoennt trực tiếp)
+    // (Lấy đưa vào formik chứ không đưa vào compoennt trực tiếp)
     const { projectEdit } = props;
 
     return {
@@ -146,15 +144,15 @@ const EditProjectForm = withFormik({
   },
   validationSchema: Yup.object().shape({}),
   handleSubmit: (values, { props, setSubmitting }) => {
-    //Khi người dùng bấm submit => đưa dữ liệu về backend thông qua api
+    // Khi người dùng bấm submit => đưa dữ liệu về backend thông qua api
 
-    //Gọi saga
+    // Gọi saga
     props.dispatch({
-      type: "UPDATE_PROJECT_SAGA",
+      type: 'UPDATE_PROJECT_SAGA',
       prjectUpdate: values,
     });
   },
-  displayName: "EditProjectForm",
+  displayName: 'EditProjectForm',
 })(FormEditProject);
 
 const mapStateToProps = (state) => ({

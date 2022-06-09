@@ -1,6 +1,7 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
-import "./Header.css";
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import './Header.css';
+
 export default function Header() {
   return (
     <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
@@ -21,17 +22,18 @@ export default function Header() {
           <li className="nav-item">
             <NavLink
               activeClassName="activeNavItem"
-              activeStyle={{ fontWeight: "bold" }}
+              activeStyle={{ fontWeight: 'bold' }}
               className="nav-link"
               to="/home"
             >
-              Home{" "}
+              Home
+              {' '}
             </NavLink>
           </li>
           <li className="nav-item">
             <NavLink
               activeClassName="activeNavItem"
-              activeStyle={{ fontWeight: "bold" }}
+              activeStyle={{ fontWeight: 'bold' }}
               className="nav-link"
               to="/about"
             >
@@ -41,7 +43,7 @@ export default function Header() {
           <li className="nav-item dropdown">
             <NavLink
               activeClassName="activeNavItem"
-              activeStyle={{ fontWeight: "bold" }}
+              activeStyle={{ fontWeight: 'bold' }}
               className="nav-link"
               to="/contact"
             >
@@ -51,7 +53,7 @@ export default function Header() {
           <li className="nav-item dropdown">
             <NavLink
               activeClassName="activeNavItem"
-              activeStyle={{ fontWeight: "bold" }}
+              activeStyle={{ fontWeight: 'bold' }}
               className="nav-link"
               to="/login"
             >
@@ -61,7 +63,7 @@ export default function Header() {
           <li className="nav-item dropdown">
             <NavLink
               activeClassName="activeNavItem"
-              activeStyle={{ fontWeight: "bold" }}
+              activeStyle={{ fontWeight: 'bold' }}
               className="nav-link"
               to="/profile"
             >

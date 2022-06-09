@@ -1,12 +1,12 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 export default function MenuCyberbugs() {
   return (
-    <div className="menu" >
+    <div className="menu">
       <div className="account">
         <div className="avatar">
-          <img src={require("../../assets/img/pic4.jfif")} alt="123" />
+          <img src={require('../../assets/img/pic4.jfif')} alt="123" />
         </div>
         <div className="account-info">
           <p>CyberLearn.vn</p>
@@ -18,7 +18,7 @@ export default function MenuCyberbugs() {
           <i className="fa fa-credit-card" />
           <NavLink
             className="text-dark"
-            activeStyle={{ color: "blue" }}
+            activeStyle={{ color: 'blue' }}
             to="/cyberbugs"
             activeClassName="active font-weight-bold text-primary"
           >
@@ -29,7 +29,7 @@ export default function MenuCyberbugs() {
           <i className="fa fa-cog " />
           <NavLink
             className="text-dark"
-            activeStyle={{ color: "blue" }}
+            activeStyle={{ color: 'blue' }}
             to="/projectmanagement"
             activeClassName="active font-weight-bold  text-primary"
           >
@@ -40,7 +40,7 @@ export default function MenuCyberbugs() {
           <i className="fa fa-cog" />
           <NavLink
             className="text-dark"
-            activeStyle={{ color: "blue" }}
+            activeStyle={{ color: 'blue' }}
             to="/createproject"
             activeClassName="active font-weight-bold  text-primary"
           >

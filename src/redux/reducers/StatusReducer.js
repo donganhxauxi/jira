@@ -1,4 +1,4 @@
-import { GET_ALL_STATUS } from "../constants/Cyberbugs/StatusConstant";
+import { GET_ALL_STATUS } from '../constants/Cyberbugs/StatusConstant';
 
 const initialState = {
   arrStatus: [],

@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 import {
   call,
   delay,
@@ -8,23 +8,23 @@ import {
   takeLatest,
   put,
   select,
-} from "redux-saga/effects";
-import { cyberbugsService } from "../../../services/CyberbugsService";
-import { USER_SIGNIN_API, USLOGIN } from "../../constants/Cyberbugs/Cyberbugs";
-import { DISPLAY_LOADING, HIDE_LOADING } from "../../constants/LoadingConst";
+} from 'redux-saga/effects';
+import { cyberbugsService } from '../../../services/CyberbugsService';
+import { USER_SIGNIN_API, USLOGIN } from '../../constants/Cyberbugs/Cyberbugs';
+import { DISPLAY_LOADING, HIDE_LOADING } from '../../constants/LoadingConst';
 import {
   STATUS_CODE,
   TOKEN,
   USER_LOGIN,
-} from "../../../util/constants/settingSystem";
-import { history } from "../../../util/history";
-import { userService } from "../../../services/UserService";
+} from '../../../util/constants/settingSystem';
+import { history } from '../../../util/history';
+import { userService } from '../../../services/UserService';
 import {
   GET_USER_BY_PROJECT_ID,
   GET_USER_BY_PROJECT_ID_SAGA,
-} from "../../constants/Cyberbugs/UserConstants";
+} from '../../constants/Cyberbugs/UserConstants';
 
-//Quản lý các action saga
+// Quản lý các action saga
 
 function* signinSaga(action) {
   yield put({
@@ -32,13 +32,11 @@ function* signinSaga(action) {
   });
   yield delay(500);
 
-  //Gọi api
+  // Gọi api
   try {
-    const { data, status } = yield call(() =>
-      cyberbugsService.signinCyberBugs(action.userLogin)
-    );
+    const { data, status } = yield call(() => cyberbugsService.signinCyberBugs(action.userLogin));
 
-    //Lưu vào localstorage khi đăng nhập thành công
+    // Lưu vào localstorage khi đăng nhập thành công
     localStorage.setItem(TOKEN, data.content.accessToken);
     localStorage.setItem(USER_LOGIN, JSON.stringify(data.content));
 
@@ -47,7 +45,7 @@ function* signinSaga(action) {
       userLogin: data.content,
     });
 
-    history.push("/home");
+    history.push('/home');
   } catch (err) {
     console.log(err.response.data);
   }
@@ -61,16 +59,14 @@ export function* theoDoiSignin() {
   yield takeLatest(USER_SIGNIN_API, signinSaga);
 }
 
-//Quản lý các action saga
+// Quản lý các action saga
 function* getUserSaga(action) {
-  //Gọi api
+  // Gọi api
   try {
-    const { data, status } = yield call(() =>
-      userService.getUser(action.keyWord)
-    );
+    const { data, status } = yield call(() => userService.getUser(action.keyWord));
 
     yield put({
-      type: "GET_USER_SEARCH",
+      type: 'GET_USER_SEARCH',
       lstUserSearch: data.content,
     });
   } catch (err) {
@@ -79,18 +75,16 @@ function* getUserSaga(action) {
 }
 
 export function* theoDoiGetUser() {
-  yield takeLatest("GET_USER_API", getUserSaga);
+  yield takeLatest('GET_USER_API', getUserSaga);
 }
 
-//Quản lý các action saga
+// Quản lý các action saga
 function* addUserProjectSaga(action) {
   try {
-    const { data, status } = yield call(() =>
-      userService.assignUserProject(action.userProject)
-    );
+    const { data, status } = yield call(() => userService.assignUserProject(action.userProject));
 
     yield put({
-      type: "GET_LIST_PROJECT_SAGA",
+      type: 'GET_LIST_PROJECT_SAGA',
     });
   } catch (err) {
     console.log(err.response.data);
@@ -98,18 +92,16 @@ function* addUserProjectSaga(action) {
 }
 
 export function* theoDoiAddUserProject() {
-  yield takeLatest("ADD_USER_PROJECT_API", addUserProjectSaga);
+  yield takeLatest('ADD_USER_PROJECT_API', addUserProjectSaga);
 }
 
-//Quản lý các action saga
+// Quản lý các action saga
 function* removeUserProjectSaga(action) {
   try {
-    const { data, status } = yield call(() =>
-      userService.deleteUserFromProject(action.userProject)
-    );
+    const { data, status } = yield call(() => userService.deleteUserFromProject(action.userProject));
 
     yield put({
-      type: "GET_LIST_PROJECT_SAGA",
+      type: 'GET_LIST_PROJECT_SAGA',
     });
   } catch (err) {
     console.log(err.response.data);
@@ -117,18 +109,16 @@ function* removeUserProjectSaga(action) {
 }
 
 export function* theoDoiRemoveUserProject() {
-  yield takeLatest("REMOVE_USER_PROJECT_API", removeUserProjectSaga);
+  yield takeLatest('REMOVE_USER_PROJECT_API', removeUserProjectSaga);
 }
 
 function* getUserByProjectIdSaga(action) {
   const { idProject } = action;
-  console.log("action", idProject);
+  console.log('action', idProject);
 
   try {
-    const { data, status } = yield call(() =>
-      userService.getUserByProjectId(idProject)
-    );
-    console.log("checkdata", data);
+    const { data, status } = yield call(() => userService.getUserByProjectId(idProject));
+    console.log('checkdata', data);
 
     if (status === STATUS_CODE.SUCCESS) {
       yield put({

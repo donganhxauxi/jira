@@ -1,9 +1,9 @@
-import { call, put, takeLatest } from "redux-saga/effects";
-import { statusService } from "../../../services/StatusService";
+import { call, put, takeLatest } from 'redux-saga/effects';
+import { statusService } from '../../../services/StatusService';
 import {
   GET_ALL_STATUS,
   GET_ALL_STATUS_SAGA,
-} from "../../constants/Cyberbugs/StatusConstant";
+} from '../../constants/Cyberbugs/StatusConstant';
 
 function* getAllStatusSaga(action) {
   try {

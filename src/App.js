@@ -1,34 +1,34 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import {
   BrowserRouter,
   NavLink,
   Route,
   Switch,
   useHistory,
-} from "react-router-dom";
+} from 'react-router-dom';
 
-import Header from "./components/Home/Header/Header";
-import Modal from "./HOC/Modal/Modal";
-import LoginCyberBugs from "./pages/CyberBugs/LoginCyberBugs/LoginCyberBugs";
-import About from "./pages/About/About";
-import Contact from "./pages/Contact/Contact";
-import Detail from "./pages/Detail/Detail";
-import Home from "./pages/Home/Home";
-import Profile from "./pages/Profile/Profile";
-import { HomeTemplate } from "./templates/HomeTemplate/HomeTemplate";
-import { UserLoginTemplate } from "./templates/HomeTemplate/UserLoginTemplate";
-import { useDispatch } from "react-redux";
-import { CyberbugsTemplate } from "./templates/HomeTemplate/CyberbugsTemplate";
-import indexCyberBugs from "./pages/CyberBugs/ProjectDetail/indexCyberBugs";
-import CreateProject from "./pages/CyberBugs/CreateProject/CreateProject";
-import ProjectManagement from "./pages/CyberBugs/ProjectManagement/ProjectManagement";
-import DrawerCyberBugs from "./HOC/CyberbugsHOC/DrawerCyberBugs";
+import { useDispatch } from 'react-redux';
+import Header from './components/Home/Header/Header';
+import Modal from './HOC/Modal/Modal';
+import LoginCyberBugs from './pages/CyberBugs/LoginCyberBugs/LoginCyberBugs';
+import About from './pages/About/About';
+import Contact from './pages/Contact/Contact';
+import Detail from './pages/Detail/Detail';
+import Home from './pages/Home/Home';
+import Profile from './pages/Profile/Profile';
+import { HomeTemplate } from './templates/HomeTemplate/HomeTemplate';
+import { UserLoginTemplate } from './templates/HomeTemplate/UserLoginTemplate';
+import { CyberbugsTemplate } from './templates/HomeTemplate/CyberbugsTemplate';
+import indexCyberBugs from './pages/CyberBugs/ProjectDetail/indexCyberBugs';
+import CreateProject from './pages/CyberBugs/CreateProject/CreateProject';
+import ProjectManagement from './pages/CyberBugs/ProjectManagement/ProjectManagement';
+import DrawerCyberBugs from './HOC/CyberbugsHOC/DrawerCyberBugs';
 
 function App() {
   const history = useHistory();
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch({ type: "ADD_HISTORY", history: history });
+    dispatch({ type: 'ADD_HISTORY', history });
   }, []);
 
   return (
@@ -56,8 +56,7 @@ function App() {
           path="/projectmanagement"
           Component={ProjectManagement}
         />
-        <CyberbugsTemplate exact path='/projectdetail/:projectId' Component={indexCyberBugs} />
-
+        <CyberbugsTemplate exact path="/projectdetail/:projectId" Component={indexCyberBugs} />
 
         <CyberbugsTemplate exact path="/" Component={ProjectManagement} />
       </Switch>

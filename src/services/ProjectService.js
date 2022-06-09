@@ -1,20 +1,15 @@
-import { baseService } from "./baseService";
+import { baseService } from './baseService';
 
 export class ProjectService extends baseService {
   constructor() {
     super();
   }
 
-  getAllProject = () => {
-    return this.get(`api/Project/getAllProject`);
-}
-  deleteProject = (id) => {
-    return this.delete(`api/Project/deleteProject?projectId=${id}`);
-  };
+  getAllProject = () => this.get('api/Project/getAllProject');
 
-  getProjectDetail = (projectId) => {
-    return this.get(`api/Project/getProjectDetail?id=${projectId}`);
-}
+  deleteProject = (id) => this.delete(`api/Project/deleteProject?projectId=${id}`);
+
+  getProjectDetail = (projectId) => this.get(`api/Project/getProjectDetail?id=${projectId}`);
 }
 
 export const projectService = new ProjectService();

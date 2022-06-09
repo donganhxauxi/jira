@@ -1,19 +1,21 @@
-import React from "react";
-import { Button, Input } from "antd";
+import React from 'react';
+import { Button, Input } from 'antd';
 import {
   UserOutlined,
   LockOutlined,
   FacebookOutlined,
   TwitterOutlined,
-} from "@ant-design/icons";
-import { withFormik, Formik } from "formik";
-import * as Yup from "yup";
-import { connect } from "react-redux";
-import { USER_SIGNIN_API } from "../../../redux/constants/Cyberbugs/Cyberbugs";
-import { singinCyberbugAction } from "../../../redux/actions/CyberBugsActions";
+} from '@ant-design/icons';
+import { withFormik, Formik } from 'formik';
+import * as Yup from 'yup';
+import { connect } from 'react-redux';
+import { USER_SIGNIN_API } from '../../../redux/constants/Cyberbugs/Cyberbugs';
+import { singinCyberbugAction } from '../../../redux/actions/CyberBugsActions';
+
 function LoginCyberBugs(props) {
-  const { values, touched, errors, handleChange, handleBlur, handleSubmit } =
-    props;
+  const {
+    values, touched, errors, handleChange, handleBlur, handleSubmit,
+  } = props;
 
   return (
     <form
@@ -31,7 +33,7 @@ function LoginCyberBugs(props) {
         <div className="d-flex mt-3">
           <Input
             onChange={handleChange}
-            style={{ width: "100%", minWidth: 300 }}
+            style={{ width: '100%', minWidth: 300 }}
             name="email"
             size="large"
             placeholder="email"
@@ -42,7 +44,7 @@ function LoginCyberBugs(props) {
         <div className="d-flex mt-3">
           <Input
             onChange={handleChange}
-            style={{ width: "100%", minWidth: 300 }}
+            style={{ width: '100%', minWidth: 300 }}
             type="password"
             name="password"
             size="large"
@@ -57,8 +59,8 @@ function LoginCyberBugs(props) {
           size="large"
           style={{
             minWidth: 300,
-            backgroundColor: "rgb(102,117,223)",
-            color: "#fff",
+            backgroundColor: 'rgb(102,117,223)',
+            color: '#fff',
           }}
           className="mt-5"
         >
@@ -67,11 +69,11 @@ function LoginCyberBugs(props) {
 
         <div className="social mt-3 d-flex">
           <Button
-            style={{ backgroundColor: "rgb(59,89,152)" }}
+            style={{ backgroundColor: 'rgb(59,89,152)' }}
             shape="circle"
-            size={"large"}
+            size="large"
           >
-            <span className="font-weight-bold" style={{ color: "#fff" }}>
+            <span className="font-weight-bold" style={{ color: '#fff' }}>
               F
             </span>
           </Button>
@@ -79,8 +81,8 @@ function LoginCyberBugs(props) {
             type="primary ml-3"
             shape="circle"
             icon={<TwitterOutlined />}
-            size={"large"}
-          ></Button>
+            size="large"
+          />
         </div>
       </div>
     </form>
@@ -89,22 +91,22 @@ function LoginCyberBugs(props) {
 
 const LoginCyberBugsWithFormik = withFormik({
   mapPropsToValues: () => ({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   }),
   validationSchema: Yup.object().shape({
     email: Yup.string()
-      .required("Email is required!")
-      .email("email is invalid!"),
+      .required('Email is required!')
+      .email('email is invalid!'),
     password: Yup.string()
-      .min(6, "password must have min 6 characters")
-      .max(32, "password  have max 32 characters"),
+      .min(6, 'password must have min 6 characters')
+      .max(32, 'password  have max 32 characters'),
   }),
   handleSubmit: ({ email, password }, { props, setSubmitting }) => {
     setSubmitting(true);
     props.dispatch(singinCyberbugAction(email, password));
   },
-  displayName: "LoginCyberBugs",
+  displayName: 'LoginCyberBugs',
 })(LoginCyberBugs);
 
 export default connect()(LoginCyberBugsWithFormik);

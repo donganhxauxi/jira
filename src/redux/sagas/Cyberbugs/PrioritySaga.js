@@ -1,9 +1,9 @@
-import { call, put, takeLatest } from "redux-saga/effects";
-import { priorityService } from "../../../services/PriorityService";
+import { call, put, takeLatest } from 'redux-saga/effects';
+import { priorityService } from '../../../services/PriorityService';
 import {
   GET_ALL_PRIORITY,
   GET_ALL_PRIORITY_SAGA,
-} from "../../constants/Cyberbugs/PriorityConstants";
+} from '../../constants/Cyberbugs/PriorityConstants';
 
 function* getAllPrioritySaga(action) {
   try {

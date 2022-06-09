@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react';
 
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from 'react-redux';
 
 export default function Modal(props) {
-  let Component = useSelector((state) => state.ModalReducer.Component);
+  const Component = useSelector((state) => state.ModalReducer.Component);
 
   return (
     <div

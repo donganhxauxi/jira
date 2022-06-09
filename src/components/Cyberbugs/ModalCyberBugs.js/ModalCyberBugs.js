@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { GET_ALL_PRIORITY_SAGA } from "../../../redux/constants/Cyberbugs/PriorityConstants";
-import { GET_ALL_STATUS_SAGA } from "../../../redux/constants/Cyberbugs/StatusConstant";
-import ReactHtmlParser from "react-html-parser";
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import ReactHtmlParser from 'react-html-parser';
+import { Editor } from '@tinymce/tinymce-react';
+import { Select } from 'antd';
+import { GET_ALL_PRIORITY_SAGA } from '../../../redux/constants/Cyberbugs/PriorityConstants';
+import { GET_ALL_STATUS_SAGA } from '../../../redux/constants/Cyberbugs/StatusConstant';
 import {
   CHANGE_ASSIGNESS,
   CHANGE_TASK_MODAL,
   REMOVE_USER_ASSIGN,
   UPDATE_STATUS_TASK_SAGA,
-} from "../../../redux/constants/Cyberbugs/TaskConstants";
+} from '../../../redux/constants/Cyberbugs/TaskConstants';
 
-import { GET_ALL_TASK_TYPE_SAGA } from "../../../redux/constants/Cyberbugs/TaskTypeConstants";
-import { Editor } from "@tinymce/tinymce-react";
-import { Select } from "antd";
+import { GET_ALL_TASK_TYPE_SAGA } from '../../../redux/constants/Cyberbugs/TaskTypeConstants';
 
 const { Option } = Select;
 
@@ -25,7 +25,7 @@ export default function ModalCyberBugs(props) {
 
   const [visibleEditor, setVisibleEditor] = useState(false);
   const [historyContent, setHistoryContent] = useState(
-    taskDetailModal.description
+    taskDetailModal.description,
   );
   const [content, setContent] = useState(taskDetailModal.description);
 
@@ -37,7 +37,7 @@ export default function ModalCyberBugs(props) {
     dispatch({ type: GET_ALL_TASK_TYPE_SAGA });
   }, []);
 
-  console.log("taskDetailModal", taskDetailModal);
+  console.log('taskDetailModal', taskDetailModal);
 
   const renderDescription = () => {
     const jsxDescription = ReactHtmlParser(taskDetailModal.description);
@@ -45,43 +45,43 @@ export default function ModalCyberBugs(props) {
       <div>
         {visibleEditor ? (
           <div>
-            {" "}
+            {' '}
             <Editor
               name="description"
               initialValue={taskDetailModal.description}
               init={{
-                selector: "textarea#myTextArea",
+                selector: 'textarea#myTextArea',
                 height: 500,
                 menubar: false,
                 plugins: [
-                  "a11ychecker",
-                  "advlist",
-                  "advcode",
-                  "advtable",
-                  "autolink",
-                  "checklist",
-                  "export",
-                  "lists",
-                  "link",
-                  "image",
-                  "charmap",
-                  "preview",
-                  "anchor",
-                  "searchreplace",
-                  "visualblocks",
-                  "powerpaste",
-                  "fullscreen",
-                  "formatpainter",
-                  "insertdatetime",
-                  "media",
-                  "table",
-                  "help",
-                  "wordcount",
+                  'a11ychecker',
+                  'advlist',
+                  'advcode',
+                  'advtable',
+                  'autolink',
+                  'checklist',
+                  'export',
+                  'lists',
+                  'link',
+                  'image',
+                  'charmap',
+                  'preview',
+                  'anchor',
+                  'searchreplace',
+                  'visualblocks',
+                  'powerpaste',
+                  'fullscreen',
+                  'formatpainter',
+                  'insertdatetime',
+                  'media',
+                  'table',
+                  'help',
+                  'wordcount',
                 ],
                 toolbar:
-                  "undo redo | casechange blocks | bold italic backcolor | " +
-                  "alignleft aligncenter alignright alignjustify | " +
-                  "bullist numlist checklist outdent indent | removeformat | a11ycheck code table help",
+                  'undo redo | casechange blocks | bold italic backcolor | '
+                  + 'alignleft aligncenter alignright alignjustify | '
+                  + 'bullist numlist checklist outdent indent | removeformat | a11ycheck code table help',
               }}
               onEditorChange={(content, editor) => {
                 setContent(content);
@@ -92,7 +92,7 @@ export default function ModalCyberBugs(props) {
               onClick={() => {
                 dispatch({
                   type: CHANGE_TASK_MODAL,
-                  name: "description",
+                  name: 'description',
                   value: content,
                 });
                 setVisibleEditor(false);
@@ -105,7 +105,7 @@ export default function ModalCyberBugs(props) {
               onClick={() => {
                 dispatch({
                   type: CHANGE_TASK_MODAL,
-                  name: "description",
+                  name: 'description',
                   value: historyContent,
                 });
                 setVisibleEditor(false);
@@ -145,9 +145,9 @@ export default function ModalCyberBugs(props) {
 
     return (
       <div>
-        <div style={{ display: "flex" }}>
+        <div style={{ display: 'flex' }}>
           <i className="fa fa-clock" />
-          <div style={{ width: "100%" }}>
+          <div style={{ width: '100%' }}>
             <div className="progress">
               <div
                 className="progress-bar"
@@ -158,10 +158,14 @@ export default function ModalCyberBugs(props) {
                 aria-valuemax={max}
               />
             </div>
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <p className="logged">{Number(timeTrackingRemaining)}h logged</p>
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+              <p className="logged">
+                {Number(timeTrackingRemaining)}
+                h logged
+              </p>
               <p className="estimate-time">
-                {Number(timeTrackingRemaining)}h remaining
+                {Number(timeTrackingRemaining)}
+                h remaining
               </p>
             </div>
           </div>
@@ -206,13 +210,11 @@ export default function ModalCyberBugs(props) {
                 onChange={handleChange}
                 style={{ marginLeft: 10 }}
               >
-                {arrTaskType.map((tp, index) => {
-                  return <option value={tp.id}>{tp.taskType}</option>;
-                })}
+                {arrTaskType.map((tp, index) => <option value={tp.id}>{tp.taskType}</option>)}
               </select>
               <span>{taskDetailModal.taskName}</span>
             </div>
-            <div style={{ display: "flex" }} className="task-click">
+            <div style={{ display: 'flex' }} className="task-click">
               <div>
                 <i className="fab fa-telegram-plane" />
                 <span style={{ paddingRight: 20 }}>Give feedback</span>
@@ -223,7 +225,7 @@ export default function ModalCyberBugs(props) {
               </div>
               <i
                 className="fa fa-trash-alt='xyz'"
-                style={{ cursor: "pointer" }}
+                style={{ cursor: 'pointer' }}
               />
               <button
                 type="button"
@@ -246,26 +248,26 @@ export default function ModalCyberBugs(props) {
                   </div>
                   <div className="comment">
                     <h6>Comment</h6>
-                    <div className="block-comment" style={{ display: "flex" }}>
+                    <div className="block-comment" style={{ display: 'flex' }}>
                       <div className="avatar">
                         <img
-                          src={require("../../../assets/img/pic1.jpg")}
+                          src={require('../../../assets/img/pic1.jpg')}
                           alt="xyz"
                         />
                       </div>
                       <div className="input-comment">
                         <input type="text" placeholder="Add a comment ..." />
                         <p>
-                          <span style={{ fontWeight: 500, color: "gray" }}>
+                          <span style={{ fontWeight: 500, color: 'gray' }}>
                             Protip:
                           </span>
                           <span>
                             press
                             <span
                               style={{
-                                fontWeight: "bold",
-                                background: "#ecedf0",
-                                color: "#b4bac6",
+                                fontWeight: 'bold',
+                                background: '#ecedf0',
+                                color: '#b4bac6',
                               }}
                             >
                               M
@@ -279,17 +281,19 @@ export default function ModalCyberBugs(props) {
                       <div className="comment-item">
                         <div
                           className="display-comment"
-                          style={{ display: "flex" }}
+                          style={{ display: 'flex' }}
                         >
                           <div className="avatar">
                             <img
-                              src={require("../../../assets/img/pic1.jpg")}
+                              src={require('../../../assets/img/pic1.jpg')}
                               alt="xyz"
                             />
                           </div>
                           <div>
                             <p style={{ marginBottom: 5 }}>
-                              Lord Gaben <span>a month ago</span>
+                              Lord Gaben
+                              {' '}
+                              <span>a month ago</span>
                             </p>
                             <p style={{ marginBottom: 5 }}>
                               Lorem ipsum dolor sit amet, consectetur
@@ -298,8 +302,9 @@ export default function ModalCyberBugs(props) {
                               accusamus molestiae?
                             </p>
                             <div>
-                              <span style={{ color: "#929398" }}>Edit</span>•
-                              <span style={{ color: "#929398" }}>Delete</span>
+                              <span style={{ color: '#929398' }}>Edit</span>
+                              •
+                              <span style={{ color: '#929398' }}>Delete</span>
                             </div>
                           </div>
                         </div>
@@ -335,85 +340,79 @@ export default function ModalCyberBugs(props) {
                         // dispatch(action);
                       }}
                     >
-                      {arrStatus.map((status, index) => {
-                        return (
-                          <option value={status.statusId} key={index}>
-                            {status.statusName}
-                          </option>
-                        );
-                      })}
+                      {arrStatus.map((status, index) => (
+                        <option value={status.statusId} key={index}>
+                          {status.statusName}
+                        </option>
+                      ))}
                     </select>
                   </div>
                   <div className="assignees" style={{ marginBottom: 10 }}>
                     <h6>ASSIGNEES</h6>
                     <div className="row">
-                      {taskDetailModal.assigness.map((user, index) => {
-                        return (
-                          <div className="col-6  mt-2 mb-2">
-                            <div
-                              key={index}
-                              style={{ display: "flex", width: "fit-content" }}
-                              className="item"
-                            >
-                              <div className="avatar">
-                                <img src={user.avatar} alt={user.avatar} />
-                              </div>
-                              <p className="name mt-1 ml-1">
-                                {user.name}
-                                <i
-                                  className="fa fa-times"
-                                  style={{ marginLeft: 5, cursor: "pointer" }}
-                                  onClick={() => {
-                                    dispatch({
-                                      type: REMOVE_USER_ASSIGN,
-                                      userId: user.id,
-                                    });
-                                  }}
-                                />
-                              </p>
+                      {taskDetailModal.assigness.map((user, index) => (
+                        <div className="col-6  mt-2 mb-2">
+                          <div
+                            key={index}
+                            style={{ display: 'flex', width: 'fit-content' }}
+                            className="item"
+                          >
+                            <div className="avatar">
+                              <img src={user.avatar} alt={user.avatar} />
                             </div>
+                            <p className="name mt-1 ml-1">
+                              {user.name}
+                              <i
+                                className="fa fa-times"
+                                style={{ marginLeft: 5, cursor: 'pointer' }}
+                                onClick={() => {
+                                  dispatch({
+                                    type: REMOVE_USER_ASSIGN,
+                                    userId: user.id,
+                                  });
+                                }}
+                              />
+                            </p>
                           </div>
-                        );
-                      })}
+                        </div>
+                      ))}
 
                       <div className="col-6  mt-2 mb-2">
                         <Select
                           options={projectDetail.members
                             ?.filter((mem) => {
-                              let index = taskDetailModal.assigness?.findIndex(
-                                (us) => us.id === mem.userId
+                              const index = taskDetailModal.assigness?.findIndex(
+                                (us) => us.id === mem.userId,
                               );
                               if (index !== -1) {
                                 return false;
                               }
                               return true;
                             })
-                            .map((mem, index) => {
-                              return { value: mem.userId, label: mem.name };
-                            })}
+                            .map((mem, index) => ({ value: mem.userId, label: mem.name }))}
                           optionFilterProp="label"
-                          style={{ width: "100%" }}
+                          style={{ width: '100%' }}
                           name="lstUser"
                           value="+ Add more"
                           className="form-control"
                           onSelect={(value) => {
-                            if (value == "0") {
+                            if (value == '0') {
                               return;
                             }
                             let userSelected = projectDetail.members.find(
-                              (mem) => mem.userId == value
+                              (mem) => mem.userId == value,
                             );
                             userSelected = {
                               ...userSelected,
                               id: userSelected.userId,
                             };
-                            //dispatchReducer
+                            // dispatchReducer
                             dispatch({
                               type: CHANGE_ASSIGNESS,
                               userSelected,
                             });
                           }}
-                        ></Select>
+                        />
                       </div>
                     </div>
                   </div>
@@ -439,13 +438,11 @@ export default function ModalCyberBugs(props) {
                         handleChange(e);
                       }}
                     >
-                      {arrPriority.map((item, index) => {
-                        return (
-                          <option key={index} value={item.priorityId}>
-                            {item.priority}
-                          </option>
-                        );
-                      })}
+                      {arrPriority.map((item, index) => (
+                        <option key={index} value={item.priorityId}>
+                          {item.priority}
+                        </option>
+                      ))}
                     </select>
                   </div>
                   <div className="estimate">
@@ -464,8 +461,8 @@ export default function ModalCyberBugs(props) {
                     <h6>TIME TRACKING</h6>
                     {renderTimeTracking()}
                   </div>
-                  <div style={{ color: "#929398" }}>Create at a month ago</div>
-                  <div style={{ color: "#929398" }}>
+                  <div style={{ color: '#929398' }}>Create at a month ago</div>
+                  <div style={{ color: '#929398' }}>
                     Update at a few seconds ago
                   </div>
                 </div>
