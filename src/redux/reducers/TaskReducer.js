@@ -1,29 +1,85 @@
-import { GET_TASK_DETAIL } from "../constants/Cyberbugs/TaskConstants"
+import { CHANGE_TASK_MODAL, GET_TASK_DETAIL } from "../constants/Cyberbugs/TaskConstants"
 
 const initialState = {
-    taskDetailModal:   {
-      "priorityTask": {
-        "priorityId": 1,
-        "priority": "High"
-      },
-      "taskTypeDetail": {
-        "id": 1,
-        "taskType": "bug"
-      },
-      "assigness": [],
-      "lstComment": [],
-      "taskId": 4567,
-      "taskName": "Spider",
-      "alias": "spider",
-      "description": "<p>ok ok</p>",
-      "statusId": "1",
-      "originalEstimate": 20,
-      "timeTrackingSpent": 10,
-      "timeTrackingRemaining": 10,
-      "typeId": 1,
-      "priorityId": 1,
-      "projectId": 5102
+  taskDetailModal:   {
+    "priorityTask": {
+      "priorityId": 2,
+      "priority": "Medium"
     },
+    "taskTypeDetail": {
+      "id": 2,
+      "taskType": "new task"
+    },
+    "assigness": [
+      {
+        "id": 827,
+        "avatar": "https://ui-avatars.com/api/?name=đâu_phải _Baby Shark",
+        "name": "đâu_phải _Baby Shark",
+        "alias": "tien-do"
+      },
+      {
+        "id": 935,
+        "avatar": "https://ui-avatars.com/api/?name=fetht2131",
+        "name": "fetht2131",
+        "alias": "hanavi"
+      },
+      {
+        "id": 984,
+        "avatar": "https://ui-avatars.com/api/?name=Change Name123123",
+        "name": "Change Name123123",
+        "alias": "dat"
+      }
+    ],
+    "lstComment": [],
+    "taskId": 4571,
+    "taskName": "loris",
+    "alias": "loris",
+    "description": "<p>l&ecirc;nh</p>",
+    "statusId": "3",
+    "originalEstimate": 50,
+    "timeTrackingSpent": 20,
+    "timeTrackingRemaining": 20,
+    "typeId": 2,
+    "priorityId": 2,
+    "projectId": 5112
+  },
+    // taskDetailModal:   {
+    //   "priorityTask": {
+    //     "priorityId": 2,
+    //     "priority": "Medium"
+    //   },
+    //   "taskTypeDetail": {
+    //     "id": 2,
+    //     "taskType": "new task"
+    //   },
+    //   "assigness": [
+    //     {
+    //       "id": 1024,
+    //       "avatar": "https://ui-avatars.com/api/?name=zoro112212",
+    //       "name": "zoro112212",
+    //       "alias": "le-ngoai-ngu"
+    //     },
+    //     {
+    //       "id": 984,
+    //       "avatar": "https://ui-avatars.com/api/?name=Change Name123123",
+    //       "name": "Change Name123123",
+    //       "alias": "dat"
+    //     }
+    //   ],
+    //   "lstComment": [],
+    //   "taskId": 4568,
+    //   "taskName": "Gao",
+    //   "alias": "gao",
+    //   "description": "<p>okla</p>",
+    //   "statusId": "3",
+    //   "originalEstimate": 30,
+    //   "timeTrackingSpent": 15,
+    //   "timeTrackingRemaining": 15,
+    //   "typeId": 2,
+    //   "priorityId": 2,
+    //   "projectId": 5102
+    // },
+    
 }
 
 
@@ -31,7 +87,13 @@ export const TaskReducer = (state = initialState,action) => {
     switch (action.type) {
 
       case GET_TASK_DETAIL: {
+        console.log(action.taskDetailModal);
         return {...state,taskDetailModal:action.taskDetailModal}
+    }
+    case CHANGE_TASK_MODAL: {
+      const {name,value} = action;
+      // console.log(state.taskDetailModal)
+      return {...state,taskDetailModal: {...state.taskDetailModal,[name]:value}}
     }
 
     default:
