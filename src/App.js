@@ -14,7 +14,6 @@ import About from "./pages/About/About";
 import Contact from "./pages/Contact/Contact";
 import Detail from "./pages/Detail/Detail";
 import Home from "./pages/Home/Home";
-import Login from "./pages/Login/Login";
 import Profile from "./pages/Profile/Profile";
 import { HomeTemplate } from "./templates/HomeTemplate/HomeTemplate";
 import { UserLoginTemplate } from "./templates/HomeTemplate/UserLoginTemplate";
