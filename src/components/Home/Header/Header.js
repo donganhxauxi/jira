@@ -5,7 +5,7 @@ export default function Header() {
   return (
     <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
       <NavLink className="navbar-brand" to="/">
-        Cyberlearn
+        Jira Clone
       </NavLink>
       <button
         className="navbar-toggler d-lg-none"
@@ -66,6 +66,22 @@ export default function Header() {
               to="/profile"
             >
               profile
+            </NavLink>
+          </li>
+          <li className="nav-item dropdown">
+            <NavLink activeClassName="activeNavItem"
+              activeStyle={{ fontWeight: "bold" }}
+              className="nav-link"
+              to="/dragdrop">
+              DemoDragDrop
+            </NavLink>
+          </li>
+          <li className="nav-item dropdown">
+            <NavLink activeClassName="activeNavItem"
+              activeStyle={{ fontWeight: "bold" }}
+              className="nav-link"
+              to="/demodragdropdnd">
+              Drag Drop DnD
             </NavLink>
           </li>
         </ul>
