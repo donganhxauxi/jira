@@ -22,7 +22,6 @@ const middleWareSaga = createMiddleWareSaga();
 const rootReducer = combineReducers({
   // reducer khai báo tại đây
   ModalReducer,
-
   HistoryReducer,
   UserLoginCyberBugsReducer,
   ProjectCategoryReducer,

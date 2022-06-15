@@ -10,5 +10,8 @@
   "editor.defaultFormatter": "dbaeumer.vscode-eslint",
   "[xml]": {
     "editor.defaultFormatter": "redhat.vscode-xml"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   }
  }
