@@ -7,7 +7,7 @@ const initialState = {
     categoryId: '2',
   },
   projectDetail: {
-
+    commentsList: [],
   },
 };
 

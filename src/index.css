@@ -3,7 +3,6 @@
   font-family: "Roboto", sans-serif;
   font-weight: 300;
   display: flex;
-  
 }
 
 /* Sider Bar */
@@ -190,7 +189,6 @@
 .main .header .breadcrumb {
   margin-bottom: 0;
   padding-left: 0px;
-  
 }
 
 .main h3 {
@@ -242,20 +240,20 @@
 
 .main .content {
   /* margin-top: 20px; */
-    display: flex;
-    margin: 26px -5px 0px;
+  display: flex;
+  margin: 26px -5px 0px;
 }
 
 .main .content .card {
   /* margin-right: 10px;
   background-color: #f4f5f7; */
-    display: flex;
-    flex-direction: column;
-    margin: 0px 5px;
-    min-height: 400px;
-    /* width: 20%; */
-    border-radius: 3px;
-    background: rgb(244, 245, 247);
+  display: flex;
+  flex-direction: column;
+  margin: 0px 5px;
+  min-height: 400px;
+  /* width: 20%; */
+  border-radius: 3px;
+  background: rgb(244, 245, 247);
 }
 
 .main .content .card .card-header {
@@ -490,6 +488,112 @@
   font-size: 14px;
 }
 
-input, button {
+.comment {
+  overflow-y: hidden;
+  width: 100%;
+  padding: 8px 12px 9px;
+  border-radius: 3px;
+  border: 1px solid rgb(223, 225, 230);
+  color: rgb(23, 43, 77);
+  background: rgb(244, 245, 247);
+  font-family: CircularStdBook;
+  font-weight: normal;
+  font-size: 15px;
+}
+
+.comment:focus {
+  background: rgb(255, 255, 255);
+  border: 1px solid rgb(76, 154, 255);
+  box-shadow: rgb(76 154 255) 0px 0px 0px 1px;
+}
+
+input,
+button {
   outline: none;
+}
+
+.CommentBtn {
+  color: #929398;
+  cursor: pointer;
+}
+
+.CommentBtn:hover {
+  text-decoration: underline;
+}
+
+.CommentInput {
+  overflow-y: hidden;
+  width: 100%;
+  padding: 8px 12px 9px;
+  border-radius: 3px;
+  border: 1px solid rgb(223, 225, 230);
+  color: rgb(23, 43, 77);
+  background: rgb(244, 245, 247);
+  font-family: CircularStdBook;
+  font-weight: normal;
+  font-size: 15px;
+}
+
+.CommentInput:focus {
+  background: rgb(255, 255, 255);
+  border: 1px solid rgb(76, 154, 255);
+  box-shadow: rgb(76 154 255) 0px 0px 0px 1px;
+}
+
+.CommentAction {
+  display: flex;
+  padding-top: 10px;
+}
+
+.SaveCommentBtn {
+  display: inline-flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  height: 32px;
+  vertical-align: middle;
+  line-height: 1;
+  padding: 0px 12px;
+  white-space: nowrap;
+  border-radius: 3px;
+  transition: all 0.1s ease 0s;
+  appearance: none;
+  cursor: pointer;
+  user-select: none;
+  font-size: 14.5px;
+  color: rgb(255, 255, 255);
+  background: rgb(0, 82, 204);
+  margin-right: 6px;
+  border: none;
+}
+
+.SaveCommentBtn:hover {
+  background: rgb(0, 94, 235);
+}
+
+.CancelCommentBtn {
+  display: inline-flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  height: 32px;
+  vertical-align: middle;
+  line-height: 1;
+  padding: 0px 12px;
+  white-space: nowrap;
+  border-radius: 3px;
+  transition: all 0.1s ease 0s;
+  appearance: none;
+  cursor: pointer;
+  user-select: none;
+  font-size: 14.5px;
+  background: rgb(255, 255, 255);
+  color: rgb(66, 82, 110);
+  border: none;
+}
+
+.CancelCommentBtn:hover {
+  background: rgb(235, 236, 240);
 }
