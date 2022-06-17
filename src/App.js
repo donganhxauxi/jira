@@ -1,28 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import {
-  BrowserRouter,
-  NavLink,
-  Route,
   Switch,
   useHistory,
 } from 'react-router-dom';
+import LoginCyberBugs from "./pages/CyberBugs/LoginCyberBugs/LoginCyberBugs";
+import SignUpCyberBugs from "./pages/CyberBugs/SignUpCyberBugs/SignUpCyberBugs";
 
-import { useDispatch } from 'react-redux';
-import Header from './components/Home/Header/Header';
-import Modal from './HOC/Modal/Modal';
-import LoginCyberBugs from './pages/CyberBugs/LoginCyberBugs/LoginCyberBugs';
-import About from './pages/About/About';
-import Contact from './pages/Contact/Contact';
-import Detail from './pages/Detail/Detail';
-import Home from './pages/Home/Home';
-import Profile from './pages/Profile/Profile';
-import { HomeTemplate } from './templates/HomeTemplate/HomeTemplate';
-import { UserLoginTemplate } from './templates/HomeTemplate/UserLoginTemplate';
-import { CyberbugsTemplate } from './templates/HomeTemplate/CyberbugsTemplate';
-import indexCyberBugs from './pages/CyberBugs/ProjectDetail/indexCyberBugs';
-import CreateProject from './pages/CyberBugs/CreateProject/CreateProject';
-import ProjectManagement from './pages/CyberBugs/ProjectManagement/ProjectManagement';
-import DrawerCyberBugs from './HOC/CyberbugsHOC/DrawerCyberBugs';
+import { HomeTemplate } from "./templates/HomeTemplate/HomeTemplate";
+import { UserLoginTemplate } from "./templates/HomeTemplate/UserLoginTemplate";
+import { useDispatch } from "react-redux";
+import { CyberbugsTemplate } from "./templates/HomeTemplate/CyberbugsTemplate";
+import indexCyberBugs from "./pages/CyberBugs/ProjectDetail/indexCyberBugs";
+import CreateProject from "./pages/CyberBugs/CreateProject/CreateProject";
+import ProjectManagement from "./pages/CyberBugs/ProjectManagement/ProjectManagement";
+import UserAdmin from "./pages/CyberBugs/UserAdmin/UserAdmin";
+import DrawerCyberBugs from "./HOC/CyberbugsHOC/DrawerCyberBugs";
+import DemoDragDrop from "./pages/DemoDragDrop/DemoDragDrop";
+import PageNotFound from "./pages/PageNotFound/PageNotFound";
+import DragAndDropDnD from "./pages/DragAndDropDnD/DragAndDropDnD";
+import LoadingComponent from "./components/GlobalSetting/LoadingComponent/LoadingComponent";
 
 function App() {
   const history = useHistory();
@@ -34,17 +30,26 @@ function App() {
   return (
     <>
       {/* <Modal /> */}
+      <LoadingComponent />
 
       <DrawerCyberBugs />
 
       <Switch>
-        <HomeTemplate path="/home" exact Component={Home} />
+        {/* <HomeTemplate path="/home" exact Component={Home} /> */}
 
-        <HomeTemplate exact path="/contact" Component={Contact} />
-        <HomeTemplate exact path="/about" Component={About} />
+        {/* <HomeTemplate exact path="/contact" Component={Contact} /> */}
+        {/* <HomeTemplate exact path="/about" Component={About} /> */}
+        {/* <HomeTemplate exact path="/dragdrop" Component={DemoDragDrop} /> */}
+
+        {/* <HomeTemplate exact path="/detail/:id" Component={Detail} /> */}
+        {/* <HomeTemplate exact path="/profile" Component={Profile} /> */}
+        {/* <HomeTemplate
+          exact
+          path="/demodragdropdnd"
+          Component={DragAndDropDnD}
+        /> */}
         <UserLoginTemplate exact path="/login" Component={LoginCyberBugs} />
-        <HomeTemplate exact path="/detail/:id" Component={Detail} />
-        <HomeTemplate exact path="/profile" Component={Profile} />
+        <UserLoginTemplate exact path="/signup" Component={SignUpCyberBugs} />
         <CyberbugsTemplate exact path="/cyberbugs" Component={indexCyberBugs} />
         <CyberbugsTemplate
           exact
@@ -56,9 +61,15 @@ function App() {
           path="/projectmanagement"
           Component={ProjectManagement}
         />
-        <CyberbugsTemplate exact path="/projectdetail/:projectId" Component={indexCyberBugs} />
+        <CyberbugsTemplate exact path="/usermanagement" Component={UserAdmin} />
+        <CyberbugsTemplate
+          exact
+          path="/projectdetail/:projectId"
+          Component={indexCyberBugs}
+        />
 
-        <CyberbugsTemplate exact path="/" Component={ProjectManagement} />
+        <UserLoginTemplate exact path="/" Component={LoginCyberBugs} />
+        <HomeTemplate path="*" component={PageNotFound} />
       </Switch>
     </>
   );

@@ -1,7 +1,7 @@
 .jira {
   height: 100vh;
   font-family: "Roboto", sans-serif;
-  font-weight: 300;
+  /* font-weight: 300; */
   display: flex;
 }
 
@@ -89,7 +89,7 @@
 .menu {
   height: 100vh;
   /* height: auto; */
-  width: 17%;
+  width: 20%;
   /* margin-left: 4%; */
   background-color: #f4f5f7;
 }
@@ -117,7 +117,9 @@
 
 .menu .account .account-info p:first-child {
   margin-bottom: 3px;
-  font-weight: 500;
+  font-weight: bold;
+  font-size: 1rem;
+  text-align: left;
 }
 
 .menu .account .account-info p:last-child {
@@ -143,7 +145,9 @@
 .menu .control div i {
   margin-right: 5px;
 }
-
+.menu .feature div span {
+  cursor: not-allowed;
+}
 .menu .feature div i {
   margin-right: 5px;
 }
@@ -488,112 +492,88 @@
   font-size: 14px;
 }
 
-.comment {
-  overflow-y: hidden;
-  width: 100%;
-  padding: 8px 12px 9px;
-  border-radius: 3px;
-  border: 1px solid rgb(223, 225, 230);
-  color: rgb(23, 43, 77);
-  background: rgb(244, 245, 247);
-  font-family: CircularStdBook;
-  font-weight: normal;
-  font-size: 15px;
+.bg-signin {
+  background: linear-gradient(#141e30, #243b55);
+}
+.btn-signup {
+  background-image: linear-gradient(
+    to right,
+    #50c9c3 0%,
+    #96deda 51%,
+    #50c9c3 100%
+  );
+}
+.btn-signup {
+  margin: 10px;
+  padding: 15px 45px;
+  text-align: center;
+  
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+ 
+  border-radius: 10px;
+  display: block;
 }
 
-.comment:focus {
-  background: rgb(255, 255, 255);
-  border: 1px solid rgb(76, 154, 255);
-  box-shadow: rgb(76 154 255) 0px 0px 0px 1px;
+.btn-signup:hover {
+  background-position: right center; 
+  color: #fff;
+  text-decoration: none;
 }
 
-input,
-button {
-  outline: none;
+.btn-signin {
+  background-image: linear-gradient(
+    to right,
+    #1fa2ff 0%,
+    #12d8fa 51%,
+    #1fa2ff 100%
+  );
+}
+.btn-signin {
+  margin: 10px;
+  padding: 15px 45px;
+  text-align: center;
+  
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  /* box-shadow: 0 0 20px #eee; */
+  border-radius: 10px;
+  display: block;
 }
 
-.CommentBtn {
-  color: #929398;
-  cursor: pointer;
+.btn-signin:hover {
+  background-position: right center; 
+  color: #fff;
+  text-decoration: none;
 }
 
-.CommentBtn:hover {
-  text-decoration: underline;
+.btn-grad {
+  background-image: linear-gradient(
+    to right,
+    #1fa2ff 0%,
+    #12d8fa 51%,
+    #1fa2ff 100%
+  );
+}
+.btn-grad {
+  padding: 15px 45px;
+  text-align: center;
+  
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  box-shadow: 0 0 20px #eee;
+  border-radius: 10px;
+  display: block;
 }
 
-.CommentInput {
-  overflow-y: hidden;
-  width: 100%;
-  padding: 8px 12px 9px;
-  border-radius: 3px;
-  border: 1px solid rgb(223, 225, 230);
-  color: rgb(23, 43, 77);
-  background: rgb(244, 245, 247);
-  font-family: CircularStdBook;
-  font-weight: normal;
-  font-size: 15px;
+.btn-grad:hover {
+  background-position: right center; 
+  color: #fff;
+  text-decoration: none;
 }
 
-.CommentInput:focus {
-  background: rgb(255, 255, 255);
-  border: 1px solid rgb(76, 154, 255);
-  box-shadow: rgb(76 154 255) 0px 0px 0px 1px;
-}
 
-.CommentAction {
-  display: flex;
-  padding-top: 10px;
-}
 
-.SaveCommentBtn {
-  display: inline-flex;
-  -webkit-box-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  justify-content: center;
-  height: 32px;
-  vertical-align: middle;
-  line-height: 1;
-  padding: 0px 12px;
-  white-space: nowrap;
-  border-radius: 3px;
-  transition: all 0.1s ease 0s;
-  appearance: none;
-  cursor: pointer;
-  user-select: none;
-  font-size: 14.5px;
-  color: rgb(255, 255, 255);
-  background: rgb(0, 82, 204);
-  margin-right: 6px;
-  border: none;
-}
-
-.SaveCommentBtn:hover {
-  background: rgb(0, 94, 235);
-}
-
-.CancelCommentBtn {
-  display: inline-flex;
-  -webkit-box-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  justify-content: center;
-  height: 32px;
-  vertical-align: middle;
-  line-height: 1;
-  padding: 0px 12px;
-  white-space: nowrap;
-  border-radius: 3px;
-  transition: all 0.1s ease 0s;
-  appearance: none;
-  cursor: pointer;
-  user-select: none;
-  font-size: 14.5px;
-  background: rgb(255, 255, 255);
-  color: rgb(66, 82, 110);
-  border: none;
-}
-
-.CancelCommentBtn:hover {
-  background: rgb(235, 236, 240);
-}

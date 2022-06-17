@@ -1,208 +1,86 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import ReactHtmlParser from "react-html-parser";
-import { Editor } from "@tinymce/tinymce-react";
-import { Select } from "antd";
+import { useDispatch, useSelector, connect } from "react-redux";
 import { GET_ALL_PRIORITY_SAGA } from "../../../redux/constants/Cyberbugs/PriorityConstants";
 import { GET_ALL_STATUS_SAGA } from "../../../redux/constants/Cyberbugs/StatusConstant";
+import ReactHtmlParser from "react-html-parser";
 import {
   CHANGE_ASSIGNESS,
   CHANGE_TASK_MODAL,
+  HANDLE_CHANGE_POST_API_SAGA,
   REMOVE_USER_ASSIGN,
   UPDATE_STATUS_TASK_SAGA,
 } from "../../../redux/constants/Cyberbugs/TaskConstants";
-import { TOKEN_CYBERSOFT } from "../../../util/constants/settingSystem";
 
 import { GET_ALL_TASK_TYPE_SAGA } from "../../../redux/constants/Cyberbugs/TaskTypeConstants";
+import { Editor } from "@tinymce/tinymce-react";
+import { Select } from "antd";
+import { withFormik } from "formik";
+import {
+  DELETE_COMMENT_SAGA,
+  EDIT_COMMENT_SAGA,
+  GET_ALL_COMMENT_SAGA,
+  INSERT_COMMENT_SAGA,
+} from "../../../redux/constants/Cyberbugs/CommentConst";
 
 const { Option } = Select;
 
-const Comment = (props) => {
-  const { avatar, commentContent, name, userId, commentId } = props;
+function ModalCyberBugs(props) {
+  const {
+    values,
+    touched,
+    errors,
+    handleChange,
+    handleBlur,
+    handleSubmit,
+    setFieldValue,
+  } = props;
 
-  console.log(commentId)
-
-  const [isEditingComment, setIsEditingComment] = useState(false);
-
-  const [editingMsg, setEditingMsg] = useState("");
-  const dispatch = useDispatch();
-
-  const submitEditMsgHandler = async () => {
-    const editCommentResponse = await fetch(
-      `https://jiranew.cybersoft.edu.vn/api/Comment/updateComment?id=${commentId}}&contentComment=${editingMsg}`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("ACCESSTOKEN")}`,
-          TokenCybersoft: TOKEN_CYBERSOFT,
-        },
-      }
-    );
-    if (!editCommentResponse.ok) {
-      throw new Error("Editing comment failed...");
-    }
-    dispatch({ type: GET_ALL_TASK_TYPE_SAGA });
-  };
-
-  const deleteCommentHandler = async () => {
-    const editCommentResponse = await fetch(
-      `https://jiranew.cybersoft.edu.vn/api/Comment/deleteComment?idComment=${commentId}`,
-      {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("ACCESSTOKEN")}`,
-          TokenCybersoft: TOKEN_CYBERSOFT,
-        },
-      }
-    );
-  };
-
-  const renderEditBtn = isEditingComment ? (
-    <div className="CommentAction">
-      <button className="SaveCommentBtn" onClick={submitEditMsgHandler}>
-        Save
-      </button>
-      <button
-        className="CancelCommentBtn"
-        onClick={() => {
-          setIsEditingComment(false);
-        }}
-      >
-        Cancel
-      </button>
-    </div>
-  ) : null;
-
-  return (
-    <div className="lastest-comment">
-      <div className="comment-item">
-        <div className="display-comment" style={{ display: "flex" }}>
-          <div className="avatar">
-            <img src={avatar} alt={name} />
-          </div>
-          <div>
-            <p style={{ marginBottom: 5 }}>{name}</p>
-            {!isEditingComment && (
-              <p style={{ marginBottom: 5 }}>{commentContent}</p>
-            )}
-            {isEditingComment && (
-              <input
-                type="text"
-                placeholder="Add a comment ..."
-                className="CommentInput"
-                onChange={(e) => {
-                  setEditingMsg(e.target.value);
-                }}
-              />
-            )}
-            {renderEditBtn}
-            {userId === JSON.parse(localStorage.getItem("USER_LOGIN")).id &&
-              !isEditingComment && (
-                <div>
-                  <span
-                    className="CommentBtn"
-                    onClick={() => {
-                      setIsEditingComment(true);
-                    }}
-                  >
-                    Edit•
-                  </span>
-                  <span className="CommentBtn" onClick={deleteCommentHandler}>
-                    Delete
-                  </span>
-                </div>
-              )}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default function ModalCyberBugs(props) {
   const { taskDetailModal } = useSelector((state) => state.TaskReducer);
   const { arrStatus } = useSelector((state) => state.StatusReducer);
   const { arrPriority } = useSelector((state) => state.PriorityReducer);
   const { arrTaskType } = useSelector((state) => state.TaskTypeReducer);
   const { projectDetail } = useSelector((state) => state.ProjectReducer);
+  // COMMENT
+  const { lstComment } = useSelector((state) => state.CommentReducer);
+  const userLogin = useSelector(
+    (state) => state.UserLoginCyberBugsReducer.userLogin
+  );
 
   const [visibleEditor, setVisibleEditor] = useState(false);
   const [historyContent, setHistoryContent] = useState(
     taskDetailModal.description
   );
+  // COMMENT
+  const [visibleComment, setVisibleComment] = useState(false);
+  const [stateEdit, setStateEdit] = useState({
+    contentComment: "",
+  });
+  const onClickEditComment = () => setVisibleComment(true);
+
   const [content, setContent] = useState(taskDetailModal.description);
 
   const dispatch = useDispatch();
-
-  const [isPostingComment, setIsPostingComment] = useState(false);
-  const [comment, setComment] = useState("");
-
-  console.log(taskDetailModal)
-
-  const insertCommentHandler = async () => {
-    if (comment === "") {
-      return;
-    }
-    const insertCommentResponse = await fetch(
-      "https://jiranew.cybersoft.edu.vn/api/Comment/insertComment",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("ACCESSTOKEN")}`,
-          TokenCybersoft: TOKEN_CYBERSOFT,
-        },
-        body: JSON.stringify({
-          taskId: taskDetailModal.taskId,
-          contentComment: comment,
-        }),
-      }
-    );
-    setIsPostingComment(false);
-    if (!insertCommentResponse.ok) {
-      throw new Error("Insert comment failed...");
-    }
-    dispatch({
-      type: 'GET_PROJECT_DETAIL',
-      projectId: taskDetailModal.projectId,
-    });
-    console.log(taskDetailModal.lstComment)
-  };
-
-  const renderCommentBtn = isPostingComment ? (
-    <div className="CommentAction">
-      <button className="SaveCommentBtn" onClick={insertCommentHandler}>
-        Save
-      </button>
-      <button
-        className="CancelCommentBtn"
-        onClick={() => {
-          setIsPostingComment(false);
-        }}
-      >
-        Cancel
-      </button>
-    </div>
-  ) : null;
-
-  const postCommentHandler = (e) => {
-    setComment(e.target.value);
-  };
 
   useEffect(() => {
     dispatch({ type: GET_ALL_STATUS_SAGA });
     dispatch({ type: GET_ALL_PRIORITY_SAGA });
     dispatch({ type: GET_ALL_TASK_TYPE_SAGA });
+    // COMMENT
+    dispatch({
+      type: GET_ALL_COMMENT_SAGA,
+      taskIdCmt: taskDetailModal.taskId,
+    });
   }, []);
+
+  console.log("taskDetailModal", taskDetailModal);
 
   const renderDescription = () => {
     const jsxDescription = ReactHtmlParser(taskDetailModal.description);
     return (
       <div>
         {visibleEditor ? (
-          <>
+          <div>
+            {" "}
             <Editor
               name="description"
               initialValue={taskDetailModal.description}
@@ -210,14 +88,10 @@ export default function ModalCyberBugs(props) {
                 selector: "textarea#myTextArea",
                 height: 500,
                 menubar: false,
+
                 plugins: [
-                  "a11ychecker",
                   "advlist",
-                  "advcode",
-                  "advtable",
                   "autolink",
-                  "checklist",
-                  "export",
                   "lists",
                   "link",
                   "image",
@@ -226,19 +100,20 @@ export default function ModalCyberBugs(props) {
                   "anchor",
                   "searchreplace",
                   "visualblocks",
-                  "powerpaste",
+                  "code",
                   "fullscreen",
-                  "formatpainter",
                   "insertdatetime",
                   "media",
                   "table",
+                  "code",
                   "help",
                   "wordcount",
                 ],
                 toolbar:
-                  "undo redo | casechange blocks | bold italic backcolor | " +
-                  "alignleft aligncenter alignright alignjustify | " +
-                  "bullist numlist checklist outdent indent | removeformat | a11ycheck code table help",
+                  "undo redo | blocks | " +
+                  "bold italic forecolor | alignleft aligncenter " +
+                  "alignright alignjustify | bullist numlist outdent indent | " +
+                  "removeformat | help",
               }}
               onEditorChange={(content, editor) => {
                 setContent(content);
@@ -248,7 +123,8 @@ export default function ModalCyberBugs(props) {
               className="btn btn-primary m-2"
               onClick={() => {
                 dispatch({
-                  type: CHANGE_TASK_MODAL,
+                  type: HANDLE_CHANGE_POST_API_SAGA,
+                  actionType: CHANGE_TASK_MODAL,
                   name: "description",
                   value: content,
                 });
@@ -261,7 +137,8 @@ export default function ModalCyberBugs(props) {
               className="btn btn-primary m-2"
               onClick={() => {
                 dispatch({
-                  type: CHANGE_TASK_MODAL,
+                  type: HANDLE_CHANGE_POST_API_SAGA,
+                  actionType: CHANGE_TASK_MODAL,
                   name: "description",
                   value: historyContent,
                 });
@@ -270,7 +147,7 @@ export default function ModalCyberBugs(props) {
             >
               Close
             </button>
-          </>
+          </div>
         ) : (
           <div
             onClick={() => {
@@ -285,10 +162,87 @@ export default function ModalCyberBugs(props) {
     );
   };
 
-  const handleChange = (e) => {
+  const handleComment = () => {
+    return lstComment?.map((comment, index) => {
+      return (
+        <div
+          key={index}
+          className="display-comment"
+          style={{ display: "flex" }}
+        >
+          <div className="avatar">
+            <img src={comment.user.avatar} alt="" />
+          </div>
+          <div>
+            <p style={{ marginBottom: 5 }}>
+              {comment.user.name} <span>a month ago</span>
+            </p>
+            {visibleComment ? (
+              <form className="input-comment">
+                <input
+                  name="contentComment"
+                  className="form-control"
+                  type="text"
+                  placeholder="Add a comment ..."
+                  onChange={(e) => {
+                    const { name, value } = e.target;
+                    const newValueEdit = {
+                      ...stateEdit.contentComment,
+                      [name]: value,
+                    };
+                    setStateEdit(newValueEdit);
+                  }}
+                />
+                <span
+                  onClick={() => {
+                    dispatch({
+                      type: EDIT_COMMENT_SAGA,
+                      id: comment?.id,
+                      contentComment: stateEdit?.contentComment,
+                      taskIdCmt: comment?.taskId,
+                    });
+                    setVisibleComment(false);
+                  }}
+                  style={{ color: "#929398", cursor: "pointer" }}
+                >
+                  Save
+                </span>
+              </form>
+            ) : (
+              <p style={{ marginBottom: 5 }}>{comment.contentComment}</p>
+            )}
+            <div>
+              <span
+                onClick={onClickEditComment}
+                style={{ color: "#929398", cursor: "pointer" }}
+              >
+                Edit
+              </span>
+              •
+              <span
+                onClick={() => {
+                  dispatch({
+                    type: DELETE_COMMENT_SAGA,
+                    taskIdCmt: taskDetailModal.taskId,
+                    idComment: comment.id,
+                  });
+                }}
+                style={{ color: "#929398", cursor: "pointer" }}
+              >
+                Delete
+              </span>
+            </div>
+          </div>
+        </div>
+      );
+    });
+  };
+
+  const handleChangeModal = (e) => {
     const { name, value } = e.target;
     dispatch({
-      type: CHANGE_TASK_MODAL,
+      type: HANDLE_CHANGE_POST_API_SAGA,
+      actionType: CHANGE_TASK_MODAL,
       name,
       value,
     });
@@ -328,14 +282,14 @@ export default function ModalCyberBugs(props) {
             <input
               className="form-control"
               name="timeTrackingSpent"
-              onChange={handleChange}
+              onChange={handleChangeModal}
             />
           </div>
           <div className="col-6">
             <input
               className="form-control"
               name="timeTrackingRemaining"
-              onChange={handleChange}
+              onChange={handleChangeModal}
             />
           </div>
         </div>
@@ -360,12 +314,12 @@ export default function ModalCyberBugs(props) {
               <select
                 name="typeId"
                 value={taskDetailModal.typeId}
-                onChange={handleChange}
+                onChange={handleChangeModal}
                 style={{ marginLeft: 10 }}
               >
-                {arrTaskType.map((tp, index) => (
-                  <option value={tp.id}>{tp.taskType}</option>
-                ))}
+                {arrTaskType.map((tp, index) => {
+                  return <option value={tp.id}>{tp.taskType}</option>;
+                })}
               </select>
               <span>{taskDetailModal.taskName}</span>
             </div>
@@ -401,60 +355,36 @@ export default function ModalCyberBugs(props) {
                     <p>Description</p>
                     {renderDescription()}
                   </div>
+
                   <div className="comment">
                     <h6>Comment</h6>
                     <div className="block-comment" style={{ display: "flex" }}>
                       <div className="avatar">
-                        <img
-                          src={
-                            JSON.parse(localStorage.getItem("USER_LOGIN"))
-                              .avatar
-                          }
-                          alt="xyz"
-                        />
+                        <img src={userLogin?.avatar} alt={userLogin?.avatar} />
                       </div>
-                      <div className="input-comment">
+                      <form onSubmit={handleSubmit} className="input-comment">
                         <input
+                          name="contentComment"
+                          className="form-control"
                           type="text"
                           placeholder="Add a comment ..."
-                          className="CommentInput"
-                          onChange={postCommentHandler}
-                          onFocus={() => {
-                            setIsPostingComment(true);
-                          }}
+                          onChange={handleChange}
                         />
-                        {renderCommentBtn}
                         <p>
-                          <span style={{ fontWeight: 500, color: "gray" }}>
-                            Protip:
-                          </span>
-                          <span>
-                            press
-                            <span
-                              style={{
-                                fontWeight: "bold",
-                                background: "#ecedf0",
-                                color: "#b4bac6",
-                              }}
-                            >
-                              M
-                            </span>
-                            to comment
-                          </span>
+                          Press
+                          <button className="m-1 btn btn-primary p-1">
+                            Enter
+                          </button>
+                          to post your comment
                         </p>
-                      </div>
+                      </form>
                     </div>
-                    {taskDetailModal.lstComment?.map((comment) => (
-                      <Comment
-                        avatar={comment.avatar}
-                        commentContent={comment.commentContent}
-                        name={comment.name}
-                        userId={comment.idUser}
-                        commentId={comment.id}
-                      />
-                    ))}
+                    <div className="lastest-comment">
+                      <div className="comment-item">{handleComment()}</div>
+                    </div>
                   </div>
                 </div>
+
                 <div className="col-4">
                   <div className="status">
                     <h6>STATUS</h6>
@@ -463,80 +393,66 @@ export default function ModalCyberBugs(props) {
                       className="custom-select"
                       value={taskDetailModal.statusId}
                       onChange={(e) => {
-                        handleChange(e);
-
-                        // const action = {
-                        //   type: UPDATE_STATUS_TASK_SAGA,
-                        //   taskUpdateStatus: {
-                        //     taskId: taskDetailModal.taskId,
-                        //     statusId: e.target.value,
-                        //     projectId: taskDetailModal.projectId,
-                        //   },
-                        // };
-
-                        // console.log('action',action);
-                        // console.log("taskupdatestatus", {
-                        //   taskId: taskDetailModal.taskId,
-                        //   statusId: e.target.value,
-                        // });
-
-                        // dispatch(action);
+                        handleChangeModal(e);
                       }}
                     >
-                      {arrStatus.map((status, index) => (
-                        <option value={status.statusId} key={index}>
-                          {status.statusName}
-                        </option>
-                      ))}
+                      {arrStatus.map((status, index) => {
+                        return (
+                          <option value={status.statusId} key={index}>
+                            {status.statusName}
+                          </option>
+                        );
+                      })}
                     </select>
                   </div>
                   <div className="assignees" style={{ marginBottom: 10 }}>
                     <h6>ASSIGNEES</h6>
                     <div className="row">
-                      {taskDetailModal.assigness.map((user, index) => (
-                        <div className="col-6  mt-2 mb-2">
-                          <div
-                            key={index}
-                            style={{ display: "flex", width: "fit-content" }}
-                            className="item"
-                          >
-                            <div className="avatar">
-                              <img src={user.avatar} alt={user.avatar} />
+                      {taskDetailModal.assigness.map((user, index) => {
+                        return (
+                          <div className="col-6  mt-2 mb-2">
+                            <div
+                              key={index}
+                              style={{ display: "flex", width: "fit-content" }}
+                              className="item"
+                            >
+                              <div className="avatar">
+                                <img src={user.avatar} alt={user.avatar} />
+                              </div>
+                              <p className="name mt-1 ml-1">
+                                {user.name}
+                                <i
+                                  className="fa fa-times"
+                                  style={{ marginLeft: 5, cursor: "pointer" }}
+                                  onClick={() => {
+                                    dispatch({
+                                      type: HANDLE_CHANGE_POST_API_SAGA,
+                                      actionType: REMOVE_USER_ASSIGN,
+                                      userId: user.id,
+                                    });
+                                  }}
+                                />
+                              </p>
                             </div>
-                            <p className="name mt-1 ml-1">
-                              {user.name}
-                              <i
-                                className="fa fa-times"
-                                style={{ marginLeft: 5, cursor: "pointer" }}
-                                onClick={() => {
-                                  dispatch({
-                                    type: REMOVE_USER_ASSIGN,
-                                    userId: user.id,
-                                  });
-                                }}
-                              />
-                            </p>
                           </div>
-                        </div>
-                      ))}
+                        );
+                      })}
 
                       <div className="col-6  mt-2 mb-2">
                         <Select
                           options={projectDetail.members
                             ?.filter((mem) => {
-                              const index =
-                                taskDetailModal.assigness?.findIndex(
-                                  (us) => us.id === mem.userId
-                                );
+                              let index = taskDetailModal.assigness?.findIndex(
+                                (us) => us.id === mem.userId
+                              );
                               if (index !== -1) {
                                 return false;
                               }
                               return true;
                             })
-                            .map((mem, index) => ({
-                              value: mem.userId,
-                              label: mem.name,
-                            }))}
+                            .map((mem, index) => {
+                              return { value: mem.userId, label: mem.name };
+                            })}
                           optionFilterProp="label"
                           style={{ width: "100%" }}
                           name="lstUser"
@@ -553,28 +469,17 @@ export default function ModalCyberBugs(props) {
                               ...userSelected,
                               id: userSelected.userId,
                             };
-                            // dispatchReducer
                             dispatch({
-                              type: CHANGE_ASSIGNESS,
+                              type: HANDLE_CHANGE_POST_API_SAGA,
+                              actionType: CHANGE_ASSIGNESS,
                               userSelected,
                             });
                           }}
-                        />
+                        ></Select>
                       </div>
                     </div>
                   </div>
-                  {/* <div className="reporter">
-                                        <h6>REPORTER</h6>
-                                        <div style={{ display: 'flex' }} className="item">
-                                            <div className="avatar">
-                                                <img src={require("../../../assets/img/download (1).jfif")} alt='xyz' />
-                                            </div>
-                                            <p className="name">
-                                                Pickle Rick
-                    <i className="fa fa-times" style={{ marginLeft: 5 }} />
-                                            </p>
-                                        </div>
-                                    </div> */}
+
                   <div className="priority" style={{ marginBottom: 15 }}>
                     <h6>PRIORITY</h6>
                     <select
@@ -582,14 +487,16 @@ export default function ModalCyberBugs(props) {
                       className="form-control"
                       value={taskDetailModal.priorityId}
                       onChange={(e) => {
-                        handleChange(e);
+                        handleChangeModal(e);
                       }}
                     >
-                      {arrPriority.map((item, index) => (
-                        <option key={index} value={item.priorityId}>
-                          {item.priority}
-                        </option>
-                      ))}
+                      {arrPriority.map((item, index) => {
+                        return (
+                          <option key={index} value={item.priorityId}>
+                            {item.priority}
+                          </option>
+                        );
+                      })}
                     </select>
                   </div>
                   <div className="estimate">
@@ -600,7 +507,7 @@ export default function ModalCyberBugs(props) {
                       className="estimate-hours"
                       value={taskDetailModal.originalEstimate}
                       onChange={(e) => {
-                        handleChange(e);
+                        handleChangeModal(e);
                       }}
                     />
                   </div>
@@ -621,3 +528,32 @@ export default function ModalCyberBugs(props) {
     </div>
   );
 }
+
+const createComment = withFormik({
+  enableReinitialize: true,
+
+  mapPropsToValues: (props) => {
+    return {
+      taskId: props.taskDetailModal.taskId,
+      contentComment: "",
+    };
+  },
+
+  handleSubmit: (values, { props, setSubmitting }) => {
+    props.dispatch({
+      type: INSERT_COMMENT_SAGA,
+      postComment: values,
+    });
+  },
+
+  displayName: "CreateComment",
+})(ModalCyberBugs);
+
+const mapStateToProps = (state) => {
+  return {
+    arrProjectCategory: state.ProjectCategoryReducer.arrProjectCategory,
+    taskDetailModal: state.TaskReducer.taskDetailModal,
+  };
+};
+
+export default connect(mapStateToProps)(createComment);

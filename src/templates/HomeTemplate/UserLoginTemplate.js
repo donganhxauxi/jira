@@ -26,23 +26,27 @@ export function UserLoginTemplate(props) {
   return (
     <Route
       {...restRoute}
-      render={(propsRoute) => (
-        <Layout>
-          <Sider
-            width={width / 2}
-            style={{
-              height,
-              backgroundImage: `url(https://picsum.photos/${Math.round(
-                width / 2,
-              )}/${height})`,
-              backgroundSize: '100%',
-            }}
-          />
-          <Content>
-            <Component {...propsRoute} />
-          </Content>
-        </Layout>
-      )}
+      render={(propsRoute) => {
+        return (
+          <>
+            <Layout>
+              <Sider
+                width={width / 2}
+                style={{
+                  height: height,
+                  backgroundImage: `url(https://picsum.photos/${Math.round(
+                    width / 2
+                  )}/${height})`,
+                  backgroundSize: "100%",
+                }}
+              ></Sider>
+              <Content className="bg-signin">
+                <Component {...propsRoute} />
+              </Content>
+            </Layout>
+          </>
+        );
+      }}
     />
   );
 }

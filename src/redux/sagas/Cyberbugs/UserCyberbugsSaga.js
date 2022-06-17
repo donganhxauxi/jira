@@ -45,7 +45,7 @@ function* signinSaga(action) {
       userLogin: data.content,
     });
 
-    history.push('/home');
+    history.push("/projectmanagement");
   } catch (err) {
     console.log(err.response.data);
   }

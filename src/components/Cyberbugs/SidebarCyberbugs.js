@@ -19,7 +19,7 @@ export default function SidebarCyberbugs() {
   const dispatch = useDispatch();
 
   const [state, setState] = useState({
-    collapsed: false,
+    collapsed: true,
   });
   const toggle = () => {
     setState({

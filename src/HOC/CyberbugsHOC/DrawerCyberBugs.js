@@ -8,27 +8,25 @@ import {
   Input,
   Select,
   DatePicker,
-} from 'antd';
-import { PlusOutlined } from '@ant-design/icons';
-import { useSelector, useDispatch } from 'react-redux';
+} from "antd";
+import { PlusOutlined } from "@ant-design/icons";
+import { useSelector, useDispatch } from "react-redux";
+import { CLOSE_DRAWER, OPEN_DRAWER } from "../../redux/constants/Cyberbugs/DrawerConst";
 
 export default function DrawerCyberBugs(props) {
-  const {
-    visible, ComponentContentDrawer, callBackSubmit, title,
-  } = useSelector(
-    (state) => state.drawerReducer,
-  );
+  const { visible, ComponentContentDrawer, callBackSubmit, title } =
+    useSelector((state) => state.drawerReducer);
 
   const dispatch = useDispatch();
 
   console.log('visible', visible);
 
   const showDrawer = () => {
-    dispatch({ type: 'OPEN_DRAWER' });
+    dispatch({ type: OPEN_DRAWER });
   };
 
   const onClose = () => {
-    dispatch({ type: 'CLOSE_DRAWER' });
+    dispatch({ type: CLOSE_DRAWER });
   };
   return (
     <Drawer

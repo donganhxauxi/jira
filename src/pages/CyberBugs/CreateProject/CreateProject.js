@@ -31,7 +31,7 @@ function CreateProject(props) {
 
   return (
     <div className="container m-5">
-      <h3 style={{ marginLeft: 11 }}>CreateProject</h3>
+      <h3 style={{ marginLeft: 11 }}>Create Project</h3>
       <form
         className="container"
         onSubmit={handleSubmit}
@@ -52,34 +52,30 @@ function CreateProject(props) {
               menubar: false,
 
               plugins: [
-                'a11ychecker',
-                'advlist',
-                'advcode',
-                'advtable',
-                'autolink',
-                'checklist',
-                'export',
-                'lists',
-                'link',
-                'image',
-                'charmap',
-                'preview',
-                'anchor',
-                'searchreplace',
-                'visualblocks',
-                'powerpaste',
-                'fullscreen',
-                'formatpainter',
-                'insertdatetime',
-                'media',
-                'table',
-                'help',
-                'wordcount',
+                "advlist",
+                "autolink",
+                "lists",
+                "link",
+                "image",
+                "charmap",
+                "preview",
+                "anchor",
+                "searchreplace",
+                "visualblocks",
+                "code",
+                "fullscreen",
+                "insertdatetime",
+                "media",
+                "table",
+                "code",
+                "help",
+                "wordcount",
               ],
               toolbar:
-                'undo redo | casechange blocks | bold italic backcolor | '
-                + 'alignleft aligncenter alignright alignjustify | '
-                + 'bullist numlist checklist outdent indent | removeformat | a11ycheck code table help',
+                "undo redo | blocks | " +
+                "bold italic forecolor | alignleft aligncenter " +
+                "alignright alignjustify | bullist numlist outdent indent | " +
+                "removeformat | help",
             }}
             onEditorChange={handleEditorChange}
           />

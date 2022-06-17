@@ -1,16 +1,23 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React from "react";
+import { useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
 
 export default function MenuCyberbugs() {
+  const userLogin = useSelector(
+    (state) => state.UserLoginCyberBugsReducer.userLogin
+  );
+
   return (
     <div className="menu">
       <div className="account">
         <div className="avatar">
-          <img src={require('../../assets/img/pic4.jfif')} alt="123" />
+          <img src={userLogin?.avatar} alt={userLogin?.avatar} />
         </div>
         <div className="account-info">
-          <p>CyberLearn.vn</p>
-          <p>Report bugs</p>
+          <p>Jira Clone</p>
+          <p>
+            Welcome !<span> {userLogin?.name}</span>
+          </p>
         </div>
       </div>
       <div className="control">
@@ -37,7 +44,7 @@ export default function MenuCyberbugs() {
           </NavLink>
         </div>
         <div>
-          <i className="fa fa-cog" />
+          <i className="fas fa-folder-plus" />
           <NavLink
             className="text-dark"
             activeStyle={{ color: 'blue' }}
@@ -45,6 +52,17 @@ export default function MenuCyberbugs() {
             activeClassName="active font-weight-bold  text-primary"
           >
             Create Project
+          </NavLink>
+        </div>
+        <div>
+          <i className="fas fa-users-cog" />
+          <NavLink
+            className="text-dark"
+            activeStyle={{ color: "blue" }}
+            to="/usermanagement"
+            activeClassName="active font-weight-bold  text-primary"
+          >
+            User Management
           </NavLink>
         </div>
       </div>
