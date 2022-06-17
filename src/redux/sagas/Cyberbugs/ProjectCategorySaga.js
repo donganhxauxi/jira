@@ -7,8 +7,6 @@ import {
 } from "../../constants/Cyberbugs/Cyberbugs";
 
 function* getAllProjectCategorySaga(action) {
-  
-
   try {
     //Gọi api lấy dữ liệu về
     const { data, status } = yield call(() =>

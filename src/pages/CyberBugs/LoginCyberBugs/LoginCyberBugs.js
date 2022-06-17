@@ -5,15 +5,24 @@ import {
   LockOutlined,
   FacebookOutlined,
   TwitterOutlined,
+  GithubOutlined,
+  InstagramOutlined,
 } from "@ant-design/icons";
 import { withFormik, Formik } from "formik";
 import * as Yup from "yup";
-import { connect } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 import { USER_SIGNIN_API } from "../../../redux/constants/Cyberbugs/Cyberbugs";
 import { singinCyberbugAction } from "../../../redux/actions/CyberBugsActions";
+import { NavLink } from "react-router-dom";
+import SignUpCyberBugs from "../SignUpCyberBugs/SignUpCyberBugs";
+import { history } from "../../../util/history";
 function LoginCyberBugs(props) {
   const { values, touched, errors, handleChange, handleBlur, handleSubmit } =
     props;
+
+  // const { userForm } = useSelector((state) => state.SignUpReducer);
+  
+  console.log(errors);
 
   return (
     <form
@@ -22,12 +31,17 @@ function LoginCyberBugs(props) {
       style={{ height: window.innerHeight }}
     >
       <div
-        className="d-flex flex-column justify-content-center align-items-center"
+        className="d-flex flex-column justify-content-center align-items-center "
         style={{ height: window.innerHeight }}
       >
-        <h3 className="text-center" style={{ fontWeight: 300, fontSize: 35 }}>
-          Login cyberbugs
+        <h3
+          className="text-center text-light"
+          style={{ fontWeight: 700, fontSize: 30 }}
+        >
+          Login Cyber Bugs
         </h3>
+        {/* {!userForm ? (
+          <div> */}
         <div className="d-flex mt-3">
           <Input
             onChange={handleChange}
@@ -51,36 +65,55 @@ function LoginCyberBugs(props) {
           />
         </div>
         <div className="text-danger">{errors.password}</div>
+        {/* </div>  
+        ) : (
+            history.push("/signup")
+        )} */}
 
-        <Button
-          htmlType="submit"
-          size="large"
-          style={{
-            minWidth: 300,
-            backgroundColor: "rgb(102,117,223)",
-            color: "#fff",
-          }}
-          className="mt-5"
-        >
-          Login
-        </Button>
+        <div style={{ display: "flex" }}>
+          <button htmlType="submit" className="btn text-white btn-signup">
+            Login
+          </button>
 
-        <div className="social mt-3 d-flex">
-          <Button
-            style={{ backgroundColor: "rgb(59,89,152)" }}
-            shape="circle"
-            size={"large"}
-          >
-            <span className="font-weight-bold" style={{ color: "#fff" }}>
-              F
-            </span>
-          </Button>
-          <Button
-            type="primary ml-3"
-            shape="circle"
-            icon={<TwitterOutlined />}
-            size={"large"}
-          ></Button>
+          {/* <SignUpCyberBugs></SignUpCyberBugs> */}
+          <button type="button" className="btn text-white btn-signin">
+            <NavLink to="/signup" className="text-white">
+              Sign Up
+            </NavLink>
+          </button>
+        </div>
+
+        <div className="social mt-3 d-flex ">
+          <div>
+            <a href="https://www.github.com/" target="_blank">
+              <Button
+                type="ghost"
+                shape="circle"
+                icon={<GithubOutlined />}
+                size={"large"}
+              ></Button>
+            </a>
+          </div>
+          <div>
+            <a href="https://twitter.com/" target="_blank">
+              <Button
+                type="ghost"
+                shape="circle"
+                icon={<TwitterOutlined />}
+                size={"large"}
+              ></Button>
+            </a>
+          </div>
+          <div>
+            <a href="https://instagram.com/" target="_blank">
+              <Button
+                type="ghost"
+                shape="circle"
+                icon={<InstagramOutlined />}
+                size={"large"}
+              ></Button>
+            </a>
+          </div>
         </div>
       </div>
     </form>

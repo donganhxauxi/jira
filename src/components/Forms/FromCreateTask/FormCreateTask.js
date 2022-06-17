@@ -259,14 +259,10 @@ function FormCreateTask(props) {
             selector: "textarea#myTextArea",
             height: 300,
             menubar: false,
+
             plugins: [
-              "a11ychecker",
               "advlist",
-              "advcode",
-              "advtable",
               "autolink",
-              "checklist",
-              "export",
               "lists",
               "link",
               "image",
@@ -275,19 +271,20 @@ function FormCreateTask(props) {
               "anchor",
               "searchreplace",
               "visualblocks",
-              "powerpaste",
+              "code",
               "fullscreen",
-              "formatpainter",
               "insertdatetime",
               "media",
               "table",
+              "code",
               "help",
               "wordcount",
             ],
             toolbar:
-              "undo redo | casechange blocks | bold italic backcolor | " +
-              "alignleft aligncenter alignright alignjustify | " +
-              "bullist numlist checklist outdent indent | removeformat | a11ycheck code table help",
+              "undo redo | blocks | " +
+              "bold italic forecolor | alignleft aligncenter " +
+              "alignright alignjustify | bullist numlist outdent indent | " +
+              "removeformat | help",
           }}
           onEditorChange={(content, editor) => {
             setFieldValue("description", content);

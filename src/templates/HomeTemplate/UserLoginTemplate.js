@@ -38,7 +38,7 @@ export const UserLoginTemplate = (props) => {
                   backgroundSize: "100%",
                 }}
               ></Sider>
-              <Content>
+              <Content className="bg-signin">
                 <Component {...propsRoute} />
               </Content>
             </Layout>

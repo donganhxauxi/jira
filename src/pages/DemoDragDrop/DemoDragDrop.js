@@ -32,7 +32,6 @@ export default function DemoDragDrop(props) {
   };
 
   const handleDragEnter = (e, taskDragEnter, index) => {
-    
     //Lưu lại giá trị của task được kéo ngang qua
     set({ bottom: 0 });
     tagDragEnter.current = { ...taskDragEnter };
@@ -51,19 +50,16 @@ export default function DemoDragDrop(props) {
     let temp = taskListUpdate[indexDragTag];
     //Lấy giá trị tại vị trí đang kéo gán = thằng kéo qua
     taskListUpdate[indexDragTag] = taskListUpdate[indexDragEnter];
-    //Lấy thằng kéo qua gán = đang keo
+    //Lấy thằng kéo qua gán = đang kéo
     taskListUpdate[indexDragEnter] = temp;
 
     setTaskList(taskListUpdate);
   };
 
   const handleDragEnd = (e) => {};
-  const handleDrop = (e) => {
-    
-  };
+  const handleDrop = (e) => {};
   return (
     <div
-    
       className="container"
       onDragOver={(e) => {
         e.stopPropagation();
@@ -76,7 +72,7 @@ export default function DemoDragDrop(props) {
       }}
     >
       <div className="text-center display-4">Task list</div>
-      <div className="row" >
+      <div className="row">
         <div className="col-2"></div>
         <div className="bg-dark p-5 col-4">
           {taskList.map((task, index) => {
@@ -134,4 +130,3 @@ export default function DemoDragDrop(props) {
     </div>
   );
 }
-

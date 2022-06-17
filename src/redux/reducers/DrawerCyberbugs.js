@@ -1,4 +1,14 @@
 import React from "react";
+import {
+  CLOSE_DRAWER,
+  OPEN_DRAWER,
+  OPEN_FORM_EDIT_PROJECT,
+  SET_SUBMIT_EDIT_PROJECT,
+} from "../constants/Cyberbugs/DrawerConst";
+import {
+  OPEN_FORM_EDIT_USER_ADMIN,
+  SET_SUBMIT_EDIT_USER_ADMIN,
+} from "../constants/Cyberbugs/UserConstants";
 const initialState = {
   visible: false,
   title: "",
@@ -10,18 +20,18 @@ const initialState = {
 
 export const drawerReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "OPEN_DRAWER":
+    case OPEN_DRAWER:
       return { ...state, visible: true };
-    case "CLOSE_DRAWER":
+    case CLOSE_DRAWER:
       return { ...state, visible: false };
-    case "OPEN_FORM_EDIT_PROJECT": {
+    case OPEN_FORM_EDIT_PROJECT: {
       state.visible = true;
       state.ComponentContentDrawer = action.Component;
       state.title = action.title;
 
       return { ...state };
     }
-    case "SET_SUBMIT_EDIT_PROJECT": {
+    case SET_SUBMIT_EDIT_PROJECT: {
       state.callBackSubmit = action.submitFunction;
       return { ...state };
     }
@@ -34,6 +44,20 @@ export const drawerReducer = (state = initialState, action) => {
       state.visible = true;
       state.title = action.title;
       state.ComponentContentDrawer = action.Component;
+      return { ...state };
+    }
+
+    case OPEN_FORM_EDIT_USER_ADMIN: {
+      return {
+        ...state,
+        visible: action.visible,
+        ComponentContentDrawer: action.Component,
+        title: action.title,
+      };
+    }
+
+    case SET_SUBMIT_EDIT_USER_ADMIN: {
+      state.callBackSubmit = action.submitFunction;
       return { ...state };
     }
 

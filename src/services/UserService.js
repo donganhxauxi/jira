@@ -20,6 +20,9 @@ export class UserService extends baseService {
   getUserByProjectId = (idProject) => {
     return this.get(`api/Users/getUserByProjectId?idProject=${idProject}`);
   };
+  
+
+
 }
 
 export const userService = new UserService();

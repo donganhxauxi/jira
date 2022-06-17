@@ -93,13 +93,8 @@ function FormEditProject(props) {
                 menubar: false,
 
                 plugins: [
-                  "a11ychecker",
                   "advlist",
-                  "advcode",
-                  "advtable",
                   "autolink",
-                  "checklist",
-                  "export",
                   "lists",
                   "link",
                   "image",
@@ -108,19 +103,20 @@ function FormEditProject(props) {
                   "anchor",
                   "searchreplace",
                   "visualblocks",
-                  "powerpaste",
+                  "code",
                   "fullscreen",
-                  "formatpainter",
                   "insertdatetime",
                   "media",
                   "table",
+                  "code",
                   "help",
                   "wordcount",
                 ],
                 toolbar:
-                  "undo redo | casechange blocks | bold italic backcolor | " +
-                  "alignleft aligncenter alignright alignjustify | " +
-                  "bullist numlist checklist outdent indent | removeformat | a11ycheck code table help",
+                  "undo redo | blocks | " +
+                  "bold italic forecolor | alignleft aligncenter " +
+                  "alignright alignjustify | bullist numlist outdent indent | " +
+                  "removeformat | help",
               }}
               onEditorChange={handleEditorChange}
             />
@@ -134,7 +130,7 @@ function FormEditProject(props) {
 const EditProjectForm = withFormik({
   enableReinitialize: true,
   mapPropsToValues: (props) => {
-    //(Lấy đưa vào formik chứ không đưa vào compoennt trực tiếp)
+    //(Lấy đưa vào formik chứ không đưa vào component trực tiếp)
     const { projectEdit } = props;
 
     return {

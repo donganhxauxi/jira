@@ -7,6 +7,8 @@ import * as TaskTypeSaga from "./Cyberbugs/TaskTypeSaga";
 import * as PrioritySaga from "./Cyberbugs/PrioritySaga";
 import * as TaskSaga from "./Cyberbugs/TaskSaga";
 import * as StatusSaga from "./Cyberbugs/StatusSaga";
+import * as CommentSaga from "./Cyberbugs/CommentSaga";
+import * as UserAdminSaga from "./Cyberbugs/UserAdminSaga";
 export function* rootSaga() {
   yield all([
     //Nghiệp vụ cyberbugs ...
@@ -22,6 +24,7 @@ export function* rootSaga() {
     ProjectSaga.theoDoiDeleteProject(),
     ProjectSaga.theoDoiGetProjectDetail(),
     ProjectSaga.theoDoiGetAllProjectSaga(),
+    
     StatusSaga.theoDoiGetAllStatusSaga(),
 
     TaskTypeSaga.theoDoiGetAllTaskTypeSaga(),
@@ -31,7 +34,18 @@ export function* rootSaga() {
     TaskSaga.theoDoiGetTaskDetailSaga(),
     TaskSaga.theoDoiUpdateTaskStatusSaga(),
     TaskSaga.theoDoiHandleChangePostApi(),
-    TaskSaga.theoDoiUdpateTask()
+    TaskSaga.theoDoiUdpateTask(),
+
+
+    CommentSaga.theoDoiGetAllCommentSaga(),
+    CommentSaga.theoDoiInsertCommentSaga(),
+    CommentSaga.theoDoiDeleteCommentSaga(),
+    CommentSaga.theoDoiEditCommentSaga(),
+
+    UserAdminSaga.theoDoiUserSignUpSaga(),
+    UserAdminSaga.theoDoiGetUserAdminSaga(),
+    UserAdminSaga.theoDoiDeleteUserAdminSaga(),
+    UserAdminSaga.theoDoiUpdateUserAdminSaga(),
 
   ]);
 }

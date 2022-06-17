@@ -1,5 +1,5 @@
 import { applyMiddleware, combineReducers, createStore } from "redux";
-
+import LoadingReducer from "./reducers/LoadingReducer";
 import { ModalReducer } from "./reducers/ModalReducer";
 import reduxThunk from "redux-thunk";
 
@@ -16,11 +16,16 @@ import { TaskTypeReducer } from "./reducers/TaskTypeReducer";
 import { PriorityReducer } from "./reducers/PriorityReducer";
 import { StatusReducer } from "./reducers/StatusReducer";
 import { TaskReducer } from "./reducers/TaskReducer";
+import { CommentReducer } from "./reducers/CommentReducer";
+import { SignUpReducer } from "./reducers/SignUpReducer";
+import { UserAdminReducer } from "./reducers/UserAdminReducer";
+
 
 const middleWareSaga = createMiddleWareSaga();
 
 const rootReducer = combineReducers({
   //reducer khai báo tại đây
+  LoadingReducer,
   ModalReducer,
 
   HistoryReducer,
@@ -32,7 +37,10 @@ const rootReducer = combineReducers({
   TaskTypeReducer,
   PriorityReducer,
   StatusReducer,
-  TaskReducer
+  TaskReducer,
+  CommentReducer,
+  SignUpReducer,
+  UserAdminReducer,
 });
 
 const store = createStore(

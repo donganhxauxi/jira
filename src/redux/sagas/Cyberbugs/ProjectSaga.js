@@ -142,9 +142,6 @@ export function* theoDoiDeleteProject() {
 }
 
 function* getProjectDetailSaga(action) {
-  // yield put({
-  //   type: DISPLAY_LOADING,
-  // });
   yield delay(500);
 
   try {
@@ -162,10 +159,6 @@ function* getProjectDetailSaga(action) {
     console.log("404 not found !");
     history.push("/projectmanagement");
   }
-
-  // yield put({
-  //   type: HIDE_LOADING,
-  // });
 }
 
 export function* theoDoiGetProjectDetail() {
