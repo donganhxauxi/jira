@@ -281,6 +281,7 @@ export default function ProjectManagement(props) {
         rowKey="id"
         dataSource={projectList}
         onChange={handleChange}
+        className="ProjectManagementTable"
       />
     </div>
   );

@@ -240,12 +240,17 @@
 .main .info .text {
   text-align: center;
   line-height: 35px;
+  display: inline-block;
+  width: calc(100%);
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .main .content {
   /* margin-top: 20px; */
   display: flex;
-  margin: 26px -5px 0px;
+  flex-wrap: wrap;
 }
 
 .main .content .card {
@@ -253,7 +258,8 @@
   background-color: #f4f5f7; */
   display: flex;
   flex-direction: column;
-  margin: 0px 5px;
+  margin-top: 16px;
+  margin-right: 16px;
   min-height: 400px;
   /* width: 20%; */
   border-radius: 3px;
@@ -507,17 +513,17 @@
   margin: 10px;
   padding: 15px 45px;
   text-align: center;
-  
+
   transition: 0.5s;
   background-size: 200% auto;
   color: white;
- 
+
   border-radius: 10px;
   display: block;
 }
 
 .btn-signup:hover {
-  background-position: right center; 
+  background-position: right center;
   color: #fff;
   text-decoration: none;
 }
@@ -534,7 +540,7 @@
   margin: 10px;
   padding: 15px 45px;
   text-align: center;
-  
+
   transition: 0.5s;
   background-size: 200% auto;
   color: white;
@@ -544,7 +550,7 @@
 }
 
 .btn-signin:hover {
-  background-position: right center; 
+  background-position: right center;
   color: #fff;
   text-decoration: none;
 }
@@ -560,7 +566,7 @@
 .btn-grad {
   padding: 15px 45px;
   text-align: center;
-  
+
   transition: 0.5s;
   background-size: 200% auto;
   color: white;
@@ -570,10 +576,29 @@
 }
 
 .btn-grad:hover {
-  background-position: right center; 
+  background-position: right center;
   color: #fff;
   text-decoration: none;
 }
 
+.ProjectManagementTable {
+  min-width: 673px;
+}
 
+@media screen and (max-width: 768px) {
+  .LoginSideBackground {
+    display: none;
+  }
 
+  .menu {
+    display: none;
+  }
+}
+
+.Navigation, .account-info {
+  display: inline-block;
+  width: calc(100%);
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
