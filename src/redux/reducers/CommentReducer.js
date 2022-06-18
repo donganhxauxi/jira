@@ -54,11 +54,6 @@ import {
       case EDIT_COMMENT:
         return { ...state, lstComment: action.editComment };
   
-      // case 'TOGGLE_MENU':
-      //   return { ...state, toggleMenu: action.toggleBar}
-  
-      // case 'TOGGLE_MENU_BIG':
-      //   return { ...state, toggleMenuBig: action.toggleBarBig}
       default:
         return state;
     }
