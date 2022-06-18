@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect} from 'react';
 import {
   Switch,
   useHistory,
 } from 'react-router-dom';
+
 import LoginCyberBugs from "./pages/CyberBugs/LoginCyberBugs/LoginCyberBugs";
 import SignUpCyberBugs from "./pages/CyberBugs/SignUpCyberBugs/SignUpCyberBugs";
-
 import { HomeTemplate } from "./templates/HomeTemplate/HomeTemplate";
 import { UserLoginTemplate } from "./templates/HomeTemplate/UserLoginTemplate";
 import { useDispatch } from "react-redux";

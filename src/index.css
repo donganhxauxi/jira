@@ -240,12 +240,25 @@
 .main .info .text {
   text-align: center;
   line-height: 35px;
+  display: inline-block;
+  /* width: calc(100%);
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap; */
+}
+
+.CollapsedText {
+  display: inline-block;
+  width: calc(100%);
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .main .content {
   /* margin-top: 20px; */
   display: flex;
-  margin: 26px -5px 0px;
+  flex-wrap: wrap;
 }
 
 .main .content .card {
@@ -253,7 +266,8 @@
   background-color: #f4f5f7; */
   display: flex;
   flex-direction: column;
-  margin: 0px 5px;
+  margin-top: 16px;
+  margin-right: 16px;
   min-height: 400px;
   /* width: 20%; */
   border-radius: 3px;
@@ -394,6 +408,10 @@
 .modal-info .modal-body .issue {
   font-size: 20px;
   font-weight: 500;
+  width: calc(100%);
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .modal-info .modal-body .description p:first-child {
@@ -434,6 +452,7 @@
   padding: 3px;
   border-radius: 5px;
   flex-basis: 50%;
+  display: flex;
 }
 
 .item .avatar img {
@@ -443,6 +462,11 @@
 
 .item .name {
   margin: 0;
+  width: calc(80%);
+  display: inline-block;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .reporter .item {
@@ -490,6 +514,11 @@
 .logged,
 .estimate-time {
   font-size: 14px;
+  width: calc(100%);
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 0 5px;
 }
 
 .bg-signin {
@@ -507,17 +536,17 @@
   margin: 10px;
   padding: 15px 45px;
   text-align: center;
-  
+
   transition: 0.5s;
   background-size: 200% auto;
   color: white;
- 
+
   border-radius: 10px;
   display: block;
 }
 
 .btn-signup:hover {
-  background-position: right center; 
+  background-position: right center;
   color: #fff;
   text-decoration: none;
 }
@@ -534,7 +563,7 @@
   margin: 10px;
   padding: 15px 45px;
   text-align: center;
-  
+
   transition: 0.5s;
   background-size: 200% auto;
   color: white;
@@ -544,7 +573,7 @@
 }
 
 .btn-signin:hover {
-  background-position: right center; 
+  background-position: right center;
   color: #fff;
   text-decoration: none;
 }
@@ -560,7 +589,7 @@
 .btn-grad {
   padding: 15px 45px;
   text-align: center;
-  
+
   transition: 0.5s;
   background-size: 200% auto;
   color: white;
@@ -570,10 +599,79 @@
 }
 
 .btn-grad:hover {
-  background-position: right center; 
+  background-position: right center;
   color: #fff;
   text-decoration: none;
 }
 
+.ProjectManagementTable {
+  min-width: 673px;
+}
 
+.Details {
+  flex: 0 0 33.333333%;
+}
 
+@media screen and (max-width: 768px) {
+  .LoginSideBackground {
+    display: none;
+  }
+
+  .menu {
+    display: none;
+  }
+
+  .Details {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .status {
+    width: 100%;
+  }
+
+  .assignees {
+    width: calc(50% - 16px);
+  }
+
+  .priority {
+    width: calc(50% - 16px);
+  }
+
+  .estimate {
+    width: calc(50% - 16px);
+  }
+
+  .time-tracking {
+    width: calc(50% - 16px);
+  }
+}
+
+.Navigation,
+.account-info {
+  display: inline-block;
+  width: calc(100%);
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.assignee {
+  width: 100%;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.CloseBtn {
+  float: right;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #000;
+  text-shadow: 0 1px 0 #fff;
+  opacity: 0.5;
+  border: none;
+}

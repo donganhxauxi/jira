@@ -21,6 +21,7 @@ import {
   GET_ALL_COMMENT_SAGA,
   INSERT_COMMENT_SAGA,
 } from "../../../redux/constants/Cyberbugs/CommentConst";
+import classNames from "classnames";
 
 const { Option } = Select;
 
@@ -309,7 +310,7 @@ function ModalCyberBugs(props) {
       <div className="modal-dialog modal-info">
         <div className="modal-content">
           <div className="modal-header">
-            <div className="task-title">
+            <div className={classNames("task-title", "CollapsedText")}>
               <i className="fa fa-bookmark" />
               <select
                 name="typeId"
@@ -323,7 +324,7 @@ function ModalCyberBugs(props) {
               </select>
               <span>{taskDetailModal.taskName}</span>
             </div>
-            <div style={{ display: "flex" }} className="task-click">
+            <div style={{ display: "flex", justifyContent: "flex-end"}} className={classNames("task-click", "CollapsedText")}>
               <div>
                 <i className="fab fa-telegram-plane" />
                 <span style={{ paddingRight: 20 }}>Give feedback</span>
@@ -338,9 +339,9 @@ function ModalCyberBugs(props) {
               />
               <button
                 type="button"
-                className="close"
                 data-dismiss="modal"
                 aria-label="Close"
+                className="CloseBtn"
               >
                 <span aria-hidden="true">×</span>
               </button>
@@ -370,7 +371,7 @@ function ModalCyberBugs(props) {
                           placeholder="Add a comment ..."
                           onChange={handleChange}
                         />
-                        <p>
+                        <p className="CollapsedText">
                           Press
                           <button className="m-1 btn btn-primary p-1">
                             Enter
@@ -385,7 +386,7 @@ function ModalCyberBugs(props) {
                   </div>
                 </div>
 
-                <div className="col-4">
+                <div className= "Details">
                   <div className="status">
                     <h6>STATUS</h6>
                     <select
@@ -410,12 +411,10 @@ function ModalCyberBugs(props) {
                     <div className="row">
                       {taskDetailModal.assigness.map((user, index) => {
                         return (
-                          <div className="col-6  mt-2 mb-2">
-                            <div
-                              key={index}
-                              style={{ display: "flex", width: "fit-content" }}
-                              className="item"
-                            >
+                          <div
+                            className={classNames("mt-2", "mb-2", "assignee")}
+                          >
+                            <div key={index} className="item">
                               <div className="avatar">
                                 <img src={user.avatar} alt={user.avatar} />
                               </div>
@@ -500,7 +499,7 @@ function ModalCyberBugs(props) {
                     </select>
                   </div>
                   <div className="estimate">
-                    <h6>ORIGINAL ESTIMATE (HOURS)</h6>
+                    <h6 className="CollapsedText">ORIGINAL ESTIMATE (HOURS)</h6>
                     <input
                       name="originalEstimate"
                       type="text"
@@ -515,8 +514,10 @@ function ModalCyberBugs(props) {
                     <h6>TIME TRACKING</h6>
                     {renderTimeTracking()}
                   </div>
-                  <div style={{ color: "#929398" }}>Create at a month ago</div>
-                  <div style={{ color: "#929398" }}>
+                  <div style={{ color: "#929398" }} className="CollapsedText">
+                    Create at a month ago
+                  </div>
+                  <div style={{ color: "#929398" }} className="CollapsedText">
                     Update at a few seconds ago
                   </div>
                 </div>

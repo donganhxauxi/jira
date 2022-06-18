@@ -21,7 +21,7 @@ export default function MenuCyberbugs() {
         </div>
       </div>
       <div className="control">
-        <div>
+        <div className="Navigation">
           <i className="fa fa-credit-card" />
           <NavLink
             className="text-dark"
@@ -32,7 +32,7 @@ export default function MenuCyberbugs() {
             Cyber Board
           </NavLink>
         </div>
-        <div>
+        <div className="Navigation">
           <i className="fa fa-cog " />
           <NavLink
             className="text-dark"
@@ -43,7 +43,7 @@ export default function MenuCyberbugs() {
             Project Management
           </NavLink>
         </div>
-        <div>
+        <div className="Navigation">
           <i className="fas fa-folder-plus" />
           <NavLink
             className="text-dark"
@@ -54,7 +54,7 @@ export default function MenuCyberbugs() {
             Create Project
           </NavLink>
         </div>
-        <div>
+        <div className="Navigation">
           <i className="fas fa-users-cog" />
           <NavLink
             className="text-dark"

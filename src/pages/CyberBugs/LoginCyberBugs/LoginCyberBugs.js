@@ -22,8 +22,6 @@ function LoginCyberBugs(props) {
   } = props;
 
   // const { userForm } = useSelector((state) => state.SignUpReducer);
-  
-  console.log(errors);
 
   return (
     <form

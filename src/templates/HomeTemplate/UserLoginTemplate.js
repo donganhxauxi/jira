@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { Route } from 'react-router-dom';
-import { Button, Layout } from 'antd';
+import React, { useState, useEffect } from "react";
+import { Route } from "react-router-dom";
+import { Button, Layout } from "antd";
 
-const {
-  Header, Footer, Sider, Content,
-} = Layout;
+const { Header, Footer, Sider, Content } = Layout;
 
 export function UserLoginTemplate(props) {
   const [{ width, height }, setSize] = useState({
@@ -39,6 +37,7 @@ export function UserLoginTemplate(props) {
                   )}/${height})`,
                   backgroundSize: "100%",
                 }}
+                className="LoginSideBackground"
               ></Sider>
               <Content className="bg-signin">
                 <Component {...propsRoute} />
