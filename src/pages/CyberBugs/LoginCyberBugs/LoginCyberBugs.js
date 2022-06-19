@@ -90,6 +90,7 @@ function LoginCyberBugs(props) {
                 shape="circle"
                 icon={<GithubOutlined />}
                 size={"large"}
+                className="mr-4"
               ></Button>
             </a>
           </div>
@@ -100,6 +101,7 @@ function LoginCyberBugs(props) {
                 shape="circle"
                 icon={<TwitterOutlined />}
                 size={"large"}
+                className="mr-4"
               ></Button>
             </a>
           </div>
