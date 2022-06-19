@@ -27,6 +27,7 @@ const rootReducer = combineReducers({
   //reducer khai báo tại đây
   LoadingReducer,
   ModalReducer,
+
   HistoryReducer,
   UserLoginCyberBugsReducer,
   ProjectCategoryReducer,
@@ -44,10 +45,10 @@ const rootReducer = combineReducers({
 
 const store = createStore(
   rootReducer,
-  applyMiddleware(reduxThunk, middleWareSaga),
+  applyMiddleware(reduxThunk, middleWareSaga)
 );
 
-// gọi saga
+//gọi saga
 middleWareSaga.run(rootSaga);
 
 export default store;
