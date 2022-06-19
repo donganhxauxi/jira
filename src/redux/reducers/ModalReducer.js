@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const stateDefault = {
   Component: <p>Nội dung mặc định</p>,
@@ -6,7 +6,7 @@ const stateDefault = {
 
 export const ModalReducer = (state = stateDefault, action) => {
   switch (action.type) {
-    case 'OPEN_FORM': {
+    case "OPEN_FORM": {
       state.Component = action.Component;
       return { ...state };
     }

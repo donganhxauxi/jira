@@ -1,4 +1,4 @@
-import { GET_ALL_TASK_TYPE } from '../constants/Cyberbugs/TaskTypeConstants';
+import { GET_ALL_TASK_TYPE } from "../constants/Cyberbugs/TaskTypeConstants";
 
 const initialState = {
   arrTaskType: [],

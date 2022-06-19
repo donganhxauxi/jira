@@ -1,4 +1,4 @@
-import { GET_ALL_PRIORITY } from '../constants/Cyberbugs/PriorityConstants';
+import { GET_ALL_PRIORITY } from "../constants/Cyberbugs/PriorityConstants";
 
 const initialState = {
   arrPriority: [],
